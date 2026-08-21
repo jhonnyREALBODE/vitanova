@@ -18,8 +18,34 @@ npm run build      # build de produção em dist/
 npm run preview    # serve o build em http://localhost:4173
 ```
 
-O `dist/` gerado é estático puro — sobe em qualquer host (Netlify, Vercel,
-Cloudflare Pages, S3, hospedagem compartilhada). Não há backend.
+O `dist/` gerado é estático puro — sobe em qualquer host. Não há backend.
+
+> **Importante:** o repositório não é o site. A raiz contém código-fonte
+> (`index.html` aponta para `/src/main.js`, que só o Vite entende). O que vai
+> para a hospedagem é sempre o conteúdo de `dist/`, depois do build.
+
+### Deploy no Cloudflare Pages
+
+No painel do Pages, em **Settings → Builds & deployments**:
+
+| Campo | Valor |
+| --- | --- |
+| Framework preset | `Vite` (ou `None`) |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Root directory | *(vazio)* |
+
+Dois erros comuns, ambos já cobertos no repositório:
+
+- **Versão de Node.** O build image antigo do Pages usa Node 12, onde o Vite 5
+  não roda. O `.nvmrc` na raiz fixa Node 20. Se o build ainda usar a versão
+  errada, adicione a variável de ambiente `NODE_VERSION = 20` em
+  *Settings → Environment variables* e refaça o deploy.
+- **Diretório de saída.** O padrão do Pages é `public`; o nosso é `dist`. Sem
+  ajustar isso o build passa e o deploy falha com *output directory not found*.
+
+O arquivo `public/_headers` define o cache: assets com hash no nome são
+imutáveis, o HTML é sempre revalidado (deploy novo aparece na hora).
 
 ### Parâmetros de QA
 
