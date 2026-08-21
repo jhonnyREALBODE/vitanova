@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Site institucional Vita Nova — hero 3D (Three.js) e landing de conversão.",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "scripts": {
     "dev": "vite",

@@ -9,7 +9,10 @@ uma origem, três ramificações nomeadas.
 
 ## Como rodar
 
-Requer Node 18+.
+Requer **Node 22+** — exigência do `wrangler`, usado no deploy. O `.nvmrc`
+fixa a versão, e o `.npmrc` tem `engine-strict=true`, então o `npm install`
+falha na hora se a versão de Node estiver errada, em vez de deixar o problema
+aparecer só no deploy.
 
 ```bash
 npm install
@@ -59,6 +62,12 @@ painel (hoje `vitanova1`) — se renomear o Worker, atualize lá também.
 
 O `wrangler` está fixado como devDependency para o deploy usar sempre a mesma
 versão, em vez de baixar a mais recente a cada build.
+
+**Node 22 é obrigatório por causa dele.** O `wrangler` 4.125 exige Node
+`>=22.0.0`; com o `.nvmrc` em 20, o `npm ci` apenas avisava (`EBADENGINE`) e o
+deploy morria no último passo com *"Wrangler requires at least Node.js
+v22.0.0"*. O `engine-strict=true` no `.npmrc` fecha esse buraco: agora a
+incompatibilidade derruba o install, não o deploy.
 
 O `public/_headers` define o cache: assets com hash no nome são imutáveis, o
 HTML é sempre revalidado (deploy novo aparece na hora). Os assets estáticos do
