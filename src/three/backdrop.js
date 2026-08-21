@@ -48,16 +48,26 @@ export class Backdrop {
 
         void main(){
           vec2 p = vUv - uCenter;
-          p.x *= uAspect;
+          /* O aspect é limitado de propósito. Aplicá-lo cru deixa o
+             gradiente circular em pixels, mas numa tela 21:9 isso faz a
+             luz cair muito rápido na horizontal e aparece uma elipse
+             escura de borda visível ao lado da composição. Limitado, o
+             gradiente se alonga com a tela em vez de se fechar. */
+          p.x *= min(uAspect, 1.85);
           float d = length(p) * 1.18;
 
           vec3 col = mix(uInner, uMid, smoothstep(0.0, 0.52, d));
           col = mix(col, uOuter, smoothstep(0.42, 1.02, d));
 
           ${rich ? `
-          // nebulosa muito lenta, amplitude baixa: dá volume sem chamar atenção
-          float n = snoise(vec3(vUv * 2.1, uTime * 0.025));
-          col += vec3(0.030, 0.052, 0.018) * n;
+          /* Nebulosa muito lenta, amplitude baixa: dá volume sem chamar
+             atenção. O ruído é remapeado para [0,1] antes de somar — em
+             [-1,1] ele SUBTRAI luz, e sobre um fundo já quase preto isso
+             satura em preto e vira uma mancha escura de contorno visível
+             (aparece muito em telas largas, onde os lóbulos do ruído ficam
+             grandes). Só somando, a nebulosa clareia e nunca mancha. */
+          float n = snoise(vec3(vUv * 2.1, uTime * 0.025)) * 0.5 + 0.5;
+          col += vec3(0.042, 0.070, 0.024) * n;
           ` : ''}
 
           // vinheta: empurra o olho para o centro da composição

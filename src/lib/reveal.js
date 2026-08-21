@@ -39,6 +39,20 @@ export function initHeaderState(headerEl, heroEl) {
 
   const apply = (over) => headerEl.classList.toggle('over-hero', over);
 
+  /* Header sem barra só no topo absoluto. Assim que a página rola, o hero
+     passa POR BAIXO do header sticky e a headline atravessa os links da
+     nav — nenhum scrim resolve isso de forma confiável, porque o texto do
+     hero é claro como o da nav. A partir daí o header ganha fundo. */
+  let atTop = null;
+  const updateAtTop = () => {
+    const next = (window.scrollY || window.pageYOffset || 0) < 24;
+    if (next === atTop) return;
+    atTop = next;
+    headerEl.classList.toggle('at-top', next);
+  };
+  updateAtTop();
+  window.addEventListener('scroll', updateAtTop, { passive: true });
+
   if (!('IntersectionObserver' in window)) { apply(true); return; }
 
   const io = new IntersectionObserver(

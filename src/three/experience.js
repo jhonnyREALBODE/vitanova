@@ -40,6 +40,8 @@ const TARGET_RECT = {
 };
 
 const DESKTOP_BREAKPOINT = 1080;
+/** Folga à direita da coluna, onde cabem os rótulos dos sintomas. */
+const LABEL_GUTTER = 110;
 const CAMERA_Z = 12;
 const FOV = 42;
 
@@ -210,6 +212,19 @@ export function createExperience({ canvas, heroEl, heroInnerEl, labelsEl, format
 
     if (mode === 'desktop') {
       if (innerRect) rect.x0 = clamp((innerRect.right + 44) / size.w, 0.44, 0.72);
+
+      /* O limite direito é a coluna do site, não a borda da tela.
+         Ancorando na viewport, `visW` cresce com o aspecto e a estrutura
+         cresce junto: 379px de largura em 1440, 873px em 2560 ultrawide,
+         enquanto o texto continua preso em 1120px. O resultado é uma
+         composição esticada, com o 3D fugindo do conteúdo. Amarrado ao
+         wrap, o tamanho fica estável (~420-520px) em qualquer largura. */
+      const wrapEl = heroEl.querySelector('.wrap');
+      if (wrapEl) {
+        const wrapRight = wrapEl.getBoundingClientRect().right;
+        rect.x1 = clamp((wrapRight + LABEL_GUTTER) / size.w, rect.x0 + 0.16, 0.90);
+      }
+
       rect.y0 = clamp((headerH + 26) / size.h, 0.08, 0.30);
       rect.y1 = 0.88;
     } else {
