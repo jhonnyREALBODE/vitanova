@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Este projeto é um site estático servido pelo Cloudflare Workers.
+  //
+  // A configuração é explícita de propósito: sem ela, o `wrangler deploy`
+  // tenta detectar o framework e autoconfigurar o projeto, o que exige
+  // Vite >= 6 e falha com
+  //   "The version of Vite used in the project cannot be automatically
+  //    configured. Please update the Vite version to at least 6.0.0".
+  // Com este arquivo presente não há nada a detectar: o wrangler apenas
+  // publica o conteúdo de dist/ como assets estáticos.
+  //
+  // `name` precisa bater com o nome do Worker no painel da Cloudflare.
+  "name": "vitanova1",
+  "compatibility_date": "2025-09-01",
+
+  "assets": {
+    "directory": "./dist"
+  }
+}

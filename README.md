@@ -24,50 +24,45 @@ O `dist/` gerado é estático puro — sobe em qualquer host. Não há backend.
 > (`index.html` aponta para `/src/main.js`, que só o Vite entende). O que vai
 > para a hospedagem é sempre o conteúdo de `dist/`, depois do build.
 
-### Deploy no Cloudflare Pages
+### Deploy no Cloudflare Workers
 
-No painel do Pages, em **Settings → Builds & deployments**:
+O projeto é publicado como **site estático no Cloudflare Workers** (não
+Pages): o build gera `dist/`, e o `wrangler` sobe esse diretório como assets
+estáticos. A configuração vive em `wrangler.jsonc` na raiz.
+
+Painel da Cloudflare → **Settings → Build**:
 
 | Campo | Valor |
 | --- | --- |
-| Framework preset | `Vite` (ou `None`) |
 | Build command | `npm run build` |
-| Build output directory | `dist` |
+| Deploy command | `npx wrangler deploy` |
 | Root directory | *(vazio)* |
 
-Dois erros comuns, ambos já cobertos no repositório:
+Para publicar da sua máquina (precisa de `wrangler login` uma vez):
 
-- **Versão de Node.** O build image antigo do Pages usa Node 12, onde o Vite 5
-  não roda. O `.nvmrc` na raiz fixa Node 20. Se o build ainda usar a versão
-  errada, adicione a variável de ambiente `NODE_VERSION = 20` em
-  *Settings → Environment variables* e refaça o deploy.
-- **Diretório de saída.** O padrão do Pages é `public`; o nosso é `dist`. Sem
-  ajustar isso o build passa e o deploy falha com *output directory not found*.
+```bash
+npm run deploy      # roda o build e sobe
+```
 
-O arquivo `public/_headers` define o cache: assets com hash no nome são
-imutáveis, o HTML é sempre revalidado (deploy novo aparece na hora).
+**Por que a configuração é explícita.** Sem `wrangler.jsonc`, o
+`wrangler deploy` tenta detectar o framework e autoconfigurar o projeto —
+e essa autoconfiguração exige Vite 6+, falhando com:
 
-### Parâmetros de QA
+```
+✘ [ERROR] The version of Vite used in the project ("5.4.21") cannot be
+automatically configured. Please update the Vite version to at least "6.0.0"
+```
 
-Anexe `?tier=high|medium|low` à URL para forçar um nível de qualidade e
-conferir como o site se comporta em cada classe de aparelho sem precisar do
-aparelho. Sem o parâmetro, o tier é detectado automaticamente.
+Com o arquivo presente não há nada a detectar: o wrangler apenas publica
+`dist/`. O `name` em `wrangler.jsonc` precisa bater com o nome do Worker no
+painel (hoje `vitanova1`) — se renomear o Worker, atualize lá também.
 
----
+O `wrangler` está fixado como devDependency para o deploy usar sempre a mesma
+versão, em vez de baixar a mais recente a cada build.
 
-## Stack e por que cada escolha
-
-| Escolha | Motivo |
-| --- | --- |
-| **Vite** | Build estático, dev server com HMR, code splitting por import dinâmico sem configuração. O deploy continua sendo "suba uma pasta". |
-| **Three.js** (única dependência de runtime) | Já era a base do hero anterior; o que mudou é que agora entra via bundler, com tree-shaking e chunk próprio. |
-| **`three/addons` (UnrealBloomPass)** | O pós-processamento vem dentro do próprio Three — nenhuma dependência nova. Carregado por `import()` dinâmico: aparelhos que não recebem bloom nunca baixam esses 4,6 KB. |
-| **Sem GSAP** | A abertura precisa de uma timeline e de easings, não de um motor de animação. `src/lib/tween.js` resolve em ~2 KB, contra ~23 KB gzip do GSAP. |
-| **Sem framework de UI** | O conteúdo é estático e já estava validado em HTML. React/Vue só acrescentariam peso e uma camada de hidratação entre o usuário e o CTA. |
-
-Peso do build (gzip): **~4 KB** de CSS, **~1,5 KB** do bootstrap, **~12,5 KB**
-da cena, **~122 KB** do core do Three e **~4,6 KB** do bloom (só em tier alto).
-O HTML e o CSS pintam antes de qualquer JavaScript de 3D chegar.
+O `public/_headers` define o cache: assets com hash no nome são imutáveis, o
+HTML é sempre revalidado (deploy novo aparece na hora). Os assets estáticos do
+Workers respeitam esse arquivo — verificado com `wrangler dev`.
 
 ---
 
