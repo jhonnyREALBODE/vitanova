@@ -1,0 +1,189 @@
+/* ============================================================
+   HERO — camada de conteúdo sobre o canvas WebGL
+   Regra de ouro: o texto e os CTAs vivem em z-index acima do canvas,
+   e sempre com um scrim garantindo contraste, independente do 3D.
+   ============================================================ */
+.hero{
+  position:relative;
+  /* O header é sticky e ocupa espaço no fluxo: sem descontá-lo, 100svh
+     empurra o rodapé do hero (e os CTAs) para baixo da dobra. */
+  min-height:calc(100vh - var(--header-h));
+  min-height:calc(100svh - var(--header-h));
+  display:flex; align-items:center;
+  padding:120px 0 100px;
+  overflow:hidden;
+  isolation:isolate;
+  /* fallback sem WebGL (e enquanto o canvas não sobe) */
+  background:radial-gradient(ellipse at 66% 44%, #16330D 0%, #0C1C07 62%, #081405 100%);
+}
+/* com WebGL ativo, o fundo é pintado pelo shader de backdrop */
+html.gl .hero{ background:transparent; }
+
+/* scrim horizontal: protege a coluna de texto no desktop */
+.hero::before{
+  content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(96deg,
+    rgba(6,16,4,0.90) 0%,
+    rgba(6,16,4,0.72) 34%,
+    rgba(6,16,4,0.28) 58%,
+    rgba(6,16,4,0) 78%);
+}
+/* scrim vertical: costura o hero com a seção seguinte */
+.hero::after{
+  content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(8,20,5,0.42) 0%,
+    rgba(8,20,5,0) 26%,
+    rgba(8,20,5,0.35) 74%,
+    rgba(8,20,5,0.88) 100%);
+}
+
+.hero .wrap{ position:relative; z-index:2; width:100%; }
+.hero-inner{ max-width:640px; }
+
+/* Entre 1080px e 1200px a coluna de texto encolhe para abrir espaço
+   horizontal à estrutura 3D (o JS lê a borda real deste elemento). */
+@media (max-width:1200px){ .hero-inner{ max-width:540px; } }
+
+.hero-inner > *{
+  opacity:0; transform:translateY(16px);
+  animation:heroIn .95s cubic-bezier(.2,.7,.3,1) forwards;
+}
+.hero-inner > p.eyebrow{ animation-delay:.50s; color:#9DC97A; }
+.hero-inner > h1.display{ animation-delay:.62s; }
+.hero-inner > p.lede{ animation-delay:.78s; }
+.hero-inner > div.hero-ctas{ animation-delay:.94s; }
+@keyframes heroIn{ to{ opacity:1; transform:none; } }
+
+h1.display{
+  font-family:var(--serif); font-weight:600;
+  font-size:clamp(36px, 5.6vw, 66px); line-height:1.08; margin:0 0 24px;
+  letter-spacing:-0.5px; color:var(--paper);
+  text-wrap:balance;
+  text-shadow:0 2px 24px rgba(4,12,3,0.55);
+}
+h1.display .accent{
+  color:var(--glow-green);
+  text-shadow:0 0 32px rgba(157,219,106,0.35);
+}
+.hero .lede{
+  font-size:clamp(16.5px, 1.6vw, 19px); color:#CBCFB9; max-width:52ch; margin:0 0 34px;
+  text-shadow:0 1px 12px rgba(4,12,3,0.6);
+}
+.hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+.hero .btn-ghost{
+  background:rgba(245,242,228,0.04); color:var(--paper);
+  border-color:rgba(245,242,228,0.5);
+  backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px);
+}
+.hero .btn-ghost:hover{ background:rgba(245,242,228,0.14); border-color:var(--paper); }
+
+.scroll-cue{
+  position:absolute; left:50%; bottom:26px; transform:translateX(-50%);
+  z-index:2; display:flex; flex-direction:column; align-items:center; gap:6px;
+  color:#B9C7A9; font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+  opacity:0; animation:heroIn .8s ease 1.5s forwards;
+}
+.scroll-cue .line{ width:1px; height:26px; background:currentColor; animation:cueMove 1.8s ease-in-out infinite 1.5s; }
+@keyframes cueMove{ 0%,100%{ transform:scaleY(.55); opacity:.35; } 50%{ transform:scaleY(1); opacity:.9; } }
+
+/* ---------- rótulos do diagrama 3D (overlay em espaço de tela) ---------- */
+.diagram-labels{
+  position:absolute; inset:0; z-index:1;
+  pointer-events:none; overflow:hidden;
+  contain:layout paint;
+}
+.node-label-3d{
+  position:absolute; left:0; top:0;
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:var(--sans); font-size:13px; font-weight:600; letter-spacing:.02em;
+  color:#E7E4D3; white-space:nowrap; opacity:0;
+  will-change:transform, opacity;
+  text-shadow:0 1px 10px rgba(4,12,3,0.85), 0 0 2px rgba(4,12,3,0.9);
+}
+.node-label-3d .dot{
+  width:5px; height:5px; border-radius:50%; background:currentColor;
+  box-shadow:0 0 8px currentColor; flex-shrink:0;
+}
+.node-label-3d.root{
+  font-family:var(--serif); font-weight:600; font-size:17px; color:var(--glow-green);
+  letter-spacing:0;
+}
+.node-label-3d.terra{ color:#F0A578; }
+
+/* ---------- responsivo ---------- */
+@media (max-width:1079px){
+  /* No mobile a estrutura 3D ocupa o terço superior e o texto desce.
+     O padding-top reserva essa faixa — o JS usa a mesma proporção
+     (HERO_LAYOUT.mobile) para posicionar o núcleo. */
+  .hero{
+    align-items:flex-end;
+    padding:calc(46svh) 0 84px;
+  }
+  .hero::before{
+    background:linear-gradient(180deg,
+      rgba(6,16,4,0) 30%,
+      rgba(6,16,4,0.55) 44%,
+      rgba(6,16,4,0.90) 62%,
+      rgba(6,16,4,0.95) 100%);
+  }
+  .hero::after{ background:linear-gradient(180deg, rgba(8,20,5,0.35) 0%, rgba(8,20,5,0) 22%, rgba(8,20,5,0.55) 100%); }
+  .scroll-cue{ display:none; }
+  .hero-inner{ max-width:100%; }
+  .hero-ctas .btn{ flex:1 1 auto; min-width:180px; }
+}
+
+@media (max-width:560px){
+  .node-label-3d{ font-size:12px; }
+  .node-label-3d.root{ font-size:15px; }
+  .hero{ padding:calc(40svh) 0 54px; }
+}
+
+/* Telas curtas em retrato (celulares pequenos): comprime a faixa 3D e a
+   tipografia para o CTA principal continuar acima da dobra. */
+@media (max-width:1079px) and (max-height:720px) and (orientation:portrait){
+  .hero{ padding:calc(33svh) 0 44px; }
+  h1.display{ font-size:clamp(27px,7.4vw,40px); margin-bottom:18px; }
+  .hero .lede{ font-size:15.5px; margin-bottom:24px; }
+}
+
+/* Celular em paisagem: altura é o recurso escasso e largura sobra —
+   volta para a composição lado a lado (texto à esquerda, estrutura à direita). */
+@media (max-width:1079px) and (min-width:680px) and (max-height:760px){
+  .hero{
+    align-items:center;
+    padding:74px 0 40px;
+  }
+  .hero-inner{ max-width:54%; }
+  .hero::before{
+    background:linear-gradient(96deg,
+      rgba(6,16,4,0.92) 0%, rgba(6,16,4,0.74) 38%,
+      rgba(6,16,4,0.26) 62%, rgba(6,16,4,0) 82%);
+  }
+  h1.display{ font-size:clamp(25px,3.6vw,34px); margin-bottom:14px; }
+  .hero .lede{ font-size:14.5px; margin-bottom:20px; }
+  .hero-ctas .btn{ padding:11px 18px; font-size:13.5px; }
+}
+
+/* Paisagem muito baixa (celular deitado): a altura não comporta uma dobra
+   inteira sem espremer o texto — o hero passa a ter altura natural, o que
+   coloca o CTA o mais alto possível sem sacrificar legibilidade. */
+@media (max-height:520px) and (orientation:landscape){
+  .hero{ min-height:auto; padding:62px 0 34px; }
+  .hero-inner{ max-width:58%; }
+  h1.display{ font-size:clamp(23px,3.2vw,30px); margin-bottom:12px; }
+  .hero .lede{ font-size:14px; margin-bottom:18px; }
+  .hero-ctas .btn{ padding:10px 16px; font-size:13px; }
+}
+
+/* Dois CTAs lado a lado em telas estreitas, sem quebrar em duas linhas. */
+@media (max-width:420px){
+  .hero-ctas{ gap:10px; }
+  .hero-ctas .btn{ flex:1 1 0; min-width:0; padding:13px 10px; font-size:13.5px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-inner > *, .scroll-cue{ opacity:1; transform:none; animation:none; }
+  .scroll-cue .line{ animation:none; }
+  .node-label-3d{ opacity:1; }
+}

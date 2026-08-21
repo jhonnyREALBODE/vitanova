@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0C1C07">
+<title>Vita Nova — A causa, não o sintoma</title>
+<meta name="description" content="Vita Nova: metodologia que trata a dopamina desregulada como causa comum da compulsão alimentar, do uso excessivo de tela e da insônia.">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Vita Nova — A causa, não o sintoma">
+<meta property="og:description" content="Compulsão alimentar, uso excessivo de tela e insônia têm a mesma raiz: a dopamina desregulada. Trate a causa.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%233B6D11'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='14' fill='%23F7F5EC' text-anchor='middle'%3EVN%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:opsz,wght@8..64,500;8..64,600&family=Inter:wght@400;500;600&display=swap">
+</head>
+<body>
+
+<!--
+  Canvas único, fixo e atrás de todo o conteúdo (z-index 0).
+  As seções claras são opacas e ocluem o canvas naturalmente; apenas o hero e a
+  seção escura "Como funciona" ficam translúcidos (via a classe .gl, aplicada só
+  quando o WebGL inicializa de fato). Sem WebGL, os fundos CSS originais valem.
+-->
+<canvas id="gl-canvas" aria-hidden="true"></canvas>
+
+<a class="skip-link" href="#top">Pular para o conteúdo</a>
+
+<header class="site">
+  <div class="nav">
+    <a href="#top" class="brand">
+      <span class="mark">VN</span>
+      <span class="name">Vita Nova</span>
+    </a>
+    <nav class="links" aria-label="Seções do site">
+      <a href="#causa">A causa</a>
+      <a href="#metodo">Metodologia</a>
+      <a href="#formato">Como funciona</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/5500000000000" target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <!-- rótulos do diagrama 3D, projetados em espaço de tela pelo JS -->
+    <div class="diagram-labels" id="diagram-labels" aria-hidden="true">
+      <span class="node-label-3d root" data-node="root"><span class="dot"></span>dopamina</span>
+      <span class="node-label-3d" data-node="0"><span class="dot"></span>compulsão</span>
+      <span class="node-label-3d" data-node="1"><span class="dot"></span>tela</span>
+      <span class="node-label-3d terra" data-node="2"><span class="dot"></span>insônia</span>
+    </div>
+
+    <div class="wrap">
+      <div class="hero-inner">
+        <p class="eyebrow">Vita Nova</p>
+        <h1 class="display">Sua vida gira em torno de uma coisa só: <span class="accent">dopamina.</span></h1>
+        <p class="lede">É ela que te faz comer sem fome, checar o celular sem motivo, e não conseguir desligar a cabeça à noite. Três sintomas diferentes — a mesma causa, quase nunca tratada.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="https://wa.me/5500000000000" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <a class="btn btn-ghost" href="#metodo">Ver a metodologia</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span>role</span>
+      <span class="line"></span>
+    </div>
+  </section>
+
+  <!-- SYMPTOMS -->
+  <section class="symptoms" id="causa">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">A causa raiz</p>
+        <h2>Sintomas diferentes. A mesma origem.</h2>
+        <p>A maioria tenta resolver um de cada vez — corta comida, corta tela, tenta dormir mais cedo. Funciona por uns dias. Depois volta tudo, porque a causa nunca foi tratada.</p>
+      </div>
+      <div class="symptom-grid">
+        <div class="symptom-card reveal">
+          <p class="num">01</p>
+          <h3>Compulsão alimentar</h3>
+          <p>Beliscar sem fome, vontade de doce logo depois de comer, exagerar no fim de semana mesmo prometendo não fazer isso. Não é falta de disciplina — é o sistema de recompensa buscando alívio rápido.</p>
+        </div>
+        <div class="symptom-card reveal">
+          <p class="num">02</p>
+          <h3>Uso excessivo de tela</h3>
+          <p>Pegar o celular no meio de qualquer silêncio, sem perceber. Ler duas páginas e já sentir vontade de checar alguma coisa. O mesmo circuito de recompensa, ativado por outro estímulo.</p>
+        </div>
+        <div class="symptom-card reveal">
+          <p class="num">03</p>
+          <h3>Sono que não descansa</h3>
+          <p>Deitar cansado e não conseguir desligar a cabeça. Dormir as horas certas e acordar exausto mesmo assim. Uma noite mal dormida ainda desregula os hormônios que controlam a fome no dia seguinte.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METODO -->
+  <section class="method" id="metodo">
+    <div class="wrap method-grid">
+      <div class="method-copy reveal">
+        <p class="eyebrow">A metodologia</p>
+        <h2>Tratamos a causa. O sintoma muda como consequência.</h2>
+        <p>Restringir comida, tempo de tela ou tentar dormir mais cedo, sem entender o mecanismo por trás, é como desinstalar um aplicativo sem entender por que você abria ele toda hora. Funciona por dias. Não sustenta.</p>
+        <p>Na Vita Nova, o processo começa <strong>entendendo onde esse padrão pesa mais na sua rotina</strong> — comida, tela ou sono — e segue reduzindo essa dependência aos poucos, no seu ritmo, até o corpo voltar a responder de forma real aos estímulos, não no automático.</p>
+        <p>Conduzido por nutricionista, com abordagem que vai além do plano alimentar tradicional — porque o comportamento por trás da escolha importa tanto quanto a escolha em si.</p>
+      </div>
+
+      <ul class="step-list reveal">
+        <li>
+          <span class="tag">Etapa 1</span>
+          <div>
+            <h4>Mapeamento</h4>
+            <p>Entendemos seus gatilhos específicos — quando e por que o padrão aparece na sua rotina.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tag">Etapa 2</span>
+          <div>
+            <h4>Redução guiada</h4>
+            <p>Diminuição progressiva da dependência do estímulo, no ritmo que o seu corpo consegue sustentar — sem corte abrupto.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tag">Etapa 3</span>
+          <div>
+            <h4>Reconstrução</h4>
+            <p>O corpo volta a reconhecer fome, saciedade e descanso de verdade, à medida que o sistema se reequilibra.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tag">Etapa 4</span>
+          <div>
+            <h4>Consolidação</h4>
+            <p>A nova rotina se firma, com orientação de manutenção — sem depender de acompanhamento contínuo pra se sustentar.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FORMATO -->
+  <section class="format" id="formato">
+    <div class="wrap">
+      <p class="eyebrow reveal">Como funciona</p>
+      <h2 class="reveal">Turma fechada. Acompanhamento real.</h2>
+      <p class="lede2 reveal">Não é curso gravado, não é PDF genérico. É processo guiado, em grupo, com espaço pra fazer perguntas e ajustar o plano ao longo do caminho.</p>
+
+      <div class="format-grid">
+        <div class="format-cell reveal">
+          <h3>Aulões ao vivo</h3>
+          <p>Encontros semanais conduzidos pela nutricionista responsável, abordando cada etapa da metodologia — com espaço para perguntas ao vivo.</p>
+        </div>
+        <div class="format-cell reveal">
+          <h3>Grupo de acompanhamento</h3>
+          <p>Espaço para tirar dúvidas, registrar progresso e manter a consistência junto com outras pessoas passando pelo mesmo processo.</p>
+        </div>
+        <div class="format-cell reveal">
+          <h3>Duração definida</h3>
+          <p>Turma fechada, com início e fim marcados — pensada para gerar resultado real dentro do período, não uma assinatura sem fim.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="duvidas">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Dúvidas frequentes</p>
+        <h2>Antes de perguntar no direct</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details>
+          <summary>Isso é uma dieta? <span class="plus" aria-hidden="true">+</span></summary>
+          <p>Não no sentido tradicional. Não impomos cardápio restritivo de largada — o processo começa entendendo o comportamento por trás da compulsão, e a alimentação se ajusta como consequência desse entendimento, com orientação nutricional ao longo do caminho.</p>
+        </details>
+        <details>
+          <summary>Por que isso funciona quando outras dietas não funcionaram? <span class="plus" aria-hidden="true">+</span></summary>
+          <p>Porque ataca a causa — o sistema de recompensa desregulado — e não só o sintoma. Cortar comida sem entender o mecanismo por trás costuma sustentar por dias. Entender e reconstruir esse mecanismo aos poucos tende a sustentar por mais tempo.</p>
+        </details>
+        <details>
+          <summary>Quem conduz o processo? <span class="plus" aria-hidden="true">+</span></summary>
+          <p>Uma nutricionista parceira da Vita Nova conduz os aulões e o acompanhamento da turma, com abordagem que une orientação alimentar e entendimento do comportamento por trás das escolhas.</p>
+        </details>
+        <details>
+          <summary>Quanto tempo dura? <span class="plus" aria-hidden="true">+</span></summary>
+          <p>A turma tem início e fim definidos — os detalhes de duração e as próximas datas de abertura são compartilhados diretamente no WhatsApp ou Instagram.</p>
+        </details>
+        <details>
+          <summary>Como eu participo? <span class="plus" aria-hidden="true">+</span></summary>
+          <p>Manda uma mensagem pelo WhatsApp ou pelo direct do Instagram. O primeiro passo é entender rapidamente o seu caso antes de te explicar como entrar na próxima turma.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="wrap">
+      <h2 class="reveal">Dá pra recalibrar isso — com método, não com força de vontade sozinha.</h2>
+      <p class="reveal">Manda uma mensagem e entenda se a próxima turma faz sentido pra você.</p>
+      <div class="final-ctas reveal">
+        <a class="btn btn-primary" href="https://wa.me/5500000000000" target="_blank" rel="noopener">Falar no WhatsApp</a>
+        <a class="btn btn-ghost" href="https://instagram.com/oficial.vitanova" target="_blank" rel="noopener">Ver no Instagram</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap footer-row">
+    <span>© Vita Nova — recalibre a causa, não o sintoma.</span>
+    <a href="https://instagram.com/oficial.vitanova" target="_blank" rel="noopener">@oficial.vitanova</a>
+  </div>
+</footer>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

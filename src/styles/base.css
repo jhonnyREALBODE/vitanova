@@ -1,0 +1,96 @@
+/* ============================================================
+   Vita Nova — tokens, reset e primitivos de UI
+   ============================================================ */
+:root{
+  --bg: #F7F5EC;
+  --bg-alt: #EFEBDD;
+  --ink: #17330A;
+  --ink-soft: #2C3B22;
+  --muted: #63604F;
+  --sage: #5C8A2E;
+  --sage-deep: #3B6D11;
+  --terracota: #C1512B;
+  --terracota-soft: #E9C3B2;
+  --line: #D9D2BC;
+  --card: #FFFFFF;
+  --radius: 4px;
+  /* altura real do header, medida pelo JS em initHeaderState */
+  --header-h: 62px;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* paleta do hero escuro — espelhada nos shaders (src/three/palette.js) */
+  --dark-1: #16330D;
+  --dark-2: #0C1C07;
+  --dark-3: #081405;
+  --glow-green: #9DDB6A;
+  --glow-terra: #E8814F;
+  --paper: #F5F2E4;
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{ display:block; max-width:100%; }
+a{ color:inherit; }
+
+.wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+.eyebrow{
+  font-size:12px; letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--sage-deep); font-weight:600; margin:0 0 14px;
+}
+
+a:focus-visible, button:focus-visible, summary:focus-visible{
+  outline:2px solid var(--terracota); outline-offset:3px; border-radius:2px;
+}
+
+.skip-link{
+  position:absolute; left:-9999px; top:0; z-index:100;
+  background:var(--ink); color:var(--paper); padding:12px 18px;
+  font-size:14px; text-decoration:none;
+}
+.skip-link:focus{ left:12px; top:12px; }
+
+/* ---------- canvas WebGL: fixo, atrás de tudo, nunca captura cliques ---------- */
+#gl-canvas{
+  position:fixed; inset:0; z-index:0;
+  width:100%; height:100%; display:block;
+  pointer-events:none;
+  /* só aparece quando o experience confirma que inicializou */
+  opacity:0; transition:opacity .8s ease;
+}
+html.gl #gl-canvas{ opacity:1; }
+
+/* Todo o conteúdo de página fica acima do canvas. As seções claras são opacas,
+   então ocluem o WebGL sem custo — o canvas nem é redesenhado quando some. */
+header.site, main, footer.site{ position:relative; z-index:1; }
+
+/* ---------- botões ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:14px 24px; border-radius:var(--radius);
+  font-size:14.5px; font-weight:600; text-decoration:none;
+  border:1px solid transparent; cursor:pointer; white-space:nowrap;
+  transition:background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.btn-primary{ background:var(--terracota); color:#FBEFE9; }
+.btn-primary:hover{ background:#D96437; }
+.btn-primary:active{ transform:translateY(1px); }
+
+/* ---------- reveal on scroll ---------- */
+.reveal{ opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s cubic-bezier(.22,.75,.3,1); }
+.reveal.in{ opacity:1; transform:none; }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  .reveal{ opacity:1; transform:none; }
+}

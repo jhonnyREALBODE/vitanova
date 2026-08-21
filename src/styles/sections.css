@@ -1,0 +1,145 @@
+/* ============================================================
+   Seções pós-hero — conteúdo e hierarquia preservados do original,
+   com polimento visual (espaçamento, estados, tipografia fluida).
+   ============================================================ */
+
+/* Rede de segurança: como o canvas WebGL é fixo atrás de tudo, toda seção é
+   opaca por padrão. As duas que devem revelar o 3D (hero e "Como funciona")
+   desligam isso explicitamente, com seletores de especificidade maior. */
+main > section{ background:var(--bg); }
+
+/* ---------- SYMPTOMS ---------- */
+.symptoms{
+  padding:76px 0; background:var(--bg-alt);
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+}
+.section-head{ max-width:640px; margin-bottom:44px; }
+.section-head h2{ font-family:var(--serif); font-weight:600; font-size:clamp(26px,3.4vw,36px); margin:0 0 12px; text-wrap:balance; }
+.section-head p{ color:var(--muted); font-size:16px; margin:0; }
+
+.symptom-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.symptom-card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:30px 26px; position:relative; overflow:hidden;
+  transition:transform .3s cubic-bezier(.22,.75,.3,1), box-shadow .3s ease, border-color .3s ease;
+}
+.symptom-card::before{
+  content:""; position:absolute; left:0; top:0; width:100%; height:2px;
+  background:linear-gradient(90deg, var(--sage) 0%, var(--terracota) 100%);
+  transform:scaleX(0); transform-origin:left; transition:transform .45s cubic-bezier(.22,.75,.3,1);
+}
+.symptom-card:hover{ transform:translateY(-3px); box-shadow:0 12px 34px -18px rgba(23,51,10,0.45); border-color:#CFC7AE; }
+.symptom-card:hover::before{ transform:scaleX(1); }
+.symptom-card .num{ font-family:var(--serif); font-size:14px; color:var(--terracota); margin:0 0 14px; }
+.symptom-card h3{ font-family:var(--serif); font-weight:600; font-size:21px; margin:0 0 10px; }
+.symptom-card p{ color:var(--muted); font-size:14.5px; margin:0; }
+
+/* atraso escalonado no reveal dos cards */
+.symptom-grid .reveal:nth-child(2){ transition-delay:.09s; }
+.symptom-grid .reveal:nth-child(3){ transition-delay:.18s; }
+
+@media (max-width:820px){ .symptom-grid{ grid-template-columns:1fr; } .symptoms{ padding:60px 0; } }
+
+/* ---------- METHOD ---------- */
+/* Fundo explícito e opaco: o canvas WebGL é fixo atrás de TODO o conteúdo,
+   então qualquer seção sem background deixa o fundo escuro vazar por trás do
+   texto escuro. Só o hero e a seção "Como funciona" devem ser translúcidos. */
+.method{ padding:92px 0; background:var(--bg); }
+.method-grid{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:60px; align-items:start; }
+.method-copy h2{ font-family:var(--serif); font-weight:600; font-size:clamp(26px,3.4vw,34px); margin:0 0 18px; text-wrap:balance; }
+.method-copy p{ color:var(--muted); font-size:16px; margin:0 0 16px; }
+.method-copy strong{ color:var(--ink); font-weight:600; }
+
+.step-list{ list-style:none; margin:0; padding:0; border-top:1px solid var(--line); }
+.step-list li{
+  display:grid; grid-template-columns:auto 1fr; gap:20px;
+  padding:22px 0; border-bottom:1px solid var(--line);
+  position:relative;
+}
+.step-list li::after{
+  content:""; position:absolute; left:0; bottom:-1px; height:1px; width:0;
+  background:var(--sage); transition:width .6s cubic-bezier(.22,.75,.3,1);
+}
+.step-list.in li::after{ width:100%; }
+.step-list.in li:nth-child(2)::after{ transition-delay:.1s; }
+.step-list.in li:nth-child(3)::after{ transition-delay:.2s; }
+.step-list.in li:nth-child(4)::after{ transition-delay:.3s; }
+.step-list .tag{
+  font-family:var(--serif); font-size:14px; color:var(--sage-deep);
+  padding-top:2px; white-space:nowrap;
+}
+.step-list h4{ margin:0 0 6px; font-size:16px; font-weight:600; }
+.step-list p{ margin:0; color:var(--muted); font-size:14.5px; }
+
+@media (max-width:900px){ .method-grid{ grid-template-columns:1fr; gap:38px; } .method{ padding:64px 0; } }
+
+/* ---------- FORMAT (seção escura — recebe a camada 3D ambiente) ---------- */
+.format{
+  padding:88px 0; background:var(--ink); color:var(--bg);
+  position:relative; overflow:hidden; isolation:isolate;
+}
+/* Com a camada ambiente ativa, o fundo sólido dá lugar ao WebGL.
+   O gradiente abaixo mantém o contraste do texto sobre as partículas. */
+html.gl-ambient .format{ background:transparent; }
+html.gl-ambient .format::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(ellipse at 18% 12%, rgba(23,51,10,0.55) 0%, rgba(10,22,6,0.86) 55%, rgba(8,18,5,0.94) 100%);
+}
+.format .wrap{ position:relative; z-index:1; }
+.format .eyebrow{ color:#9DC97A; }
+.format h2{ font-family:var(--serif); font-weight:600; font-size:clamp(26px,3.4vw,34px); margin:0 0 8px; color:#F3F1E4; text-wrap:balance; }
+.format > .wrap > p.lede2{ color:#C9CBB4; font-size:16px; max-width:56ch; margin:0; }
+.format-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+  background:rgba(255,255,255,0.14); border-radius:var(--radius); overflow:hidden; margin-top:34px;
+}
+.format-cell{ background:var(--ink); padding:32px 26px; transition:background-color .3s ease; }
+html.gl-ambient .format-cell{ background:rgba(14,31,7,0.82); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); }
+.format-cell:hover{ background:#1C3D0D; }
+html.gl-ambient .format-cell:hover{ background:rgba(28,61,13,0.92); }
+.format-cell h3{ font-family:var(--serif); font-weight:600; font-size:19px; margin:0 0 10px; color:#EAF3DE; }
+.format-cell p{ margin:0; color:#B9C7A9; font-size:14.5px; }
+.format-grid .reveal:nth-child(2){ transition-delay:.09s; }
+.format-grid .reveal:nth-child(3){ transition-delay:.18s; }
+
+@media (max-width:820px){ .format-grid{ grid-template-columns:1fr; } .format{ padding:64px 0; } }
+
+/* ---------- FAQ ---------- */
+.faq{ padding:92px 0; background:var(--bg); }
+.faq-list{ max-width:760px; }
+details{ border-bottom:1px solid var(--line); padding:20px 0; }
+details summary{
+  cursor:pointer; font-family:var(--serif); font-size:19px; font-weight:600;
+  list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px;
+  transition:color .2s ease;
+}
+details summary:hover{ color:var(--sage-deep); }
+details summary::-webkit-details-marker{ display:none; }
+details summary .plus{ font-size:20px; color:var(--terracota); transition:transform .25s ease; flex-shrink:0; line-height:1; }
+details[open] summary .plus{ transform:rotate(45deg); }
+details p{ color:var(--muted); font-size:15px; margin:14px 0 0; max-width:65ch; }
+@media (max-width:820px){ .faq{ padding:64px 0; } details summary{ font-size:17px; } }
+
+/* ---------- FINAL CTA + FOOTER ---------- */
+.final-cta{
+  padding:88px 0; text-align:center; background:var(--bg-alt);
+  border-top:1px solid var(--line);
+}
+.final-cta h2{
+  font-family:var(--serif); font-weight:600; font-size:clamp(28px,4vw,42px);
+  margin:0 auto 16px; max-width:20ch; text-wrap:balance;
+}
+.final-cta p{ color:var(--muted); font-size:16px; margin:0 0 30px; }
+.final-ctas{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+.final-cta .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--line); }
+.final-cta .btn-ghost:hover{ background:#E4DFCD; border-color:#C5BCA2; }
+.final-ctas .reveal{ transition-delay:.12s; }
+
+footer.site{ padding:34px 0 40px; background:var(--bg-alt); }
+.footer-row{
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+  font-size:13px; color:var(--muted);
+}
+.footer-row a{ text-decoration:none; color:var(--muted); }
+.footer-row a:hover{ color:var(--sage-deep); }

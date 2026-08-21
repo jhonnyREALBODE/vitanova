@@ -1,0 +1,18 @@
+{
+  "name": "vitanova",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Site institucional Vita Nova — hero 3D (Three.js) e landing de conversão.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173"
+  },
+  "dependencies": {
+    "three": "^0.160.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11"
+  }
+}
