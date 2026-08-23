@@ -191,7 +191,11 @@ rótulo fora da tela, ausência de scroll horizontal, e o CTA principal visível
 e clicável acima da dobra. Também validados os três tiers e o modo
 `prefers-reduced-motion`.
 
-## Pendências de conteúdo
+## Contato
 
-Os links de contato ainda são os placeholders do arquivo original
-(`https://wa.me/5500000000000`). Trocar pelo número real antes de publicar.
+O número de WhatsApp e a mensagem pré-preenchida ficam em
+`src/config/contact.js`. Os CTAs do HTML usam o token `%WHATSAPP_URL%`, que o
+plugin `contactLinks` (em `vite.config.js`) substitui pelo link real durante o
+build — o href sai literal no HTML publicado, sem depender de JavaScript.
+
+Para trocar o número ou a mensagem, edite apenas `src/config/contact.js`.

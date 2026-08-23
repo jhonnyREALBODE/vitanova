@@ -1,6 +1,24 @@
 import { defineConfig } from 'vite';
+import { WHATSAPP_URL } from './src/config/contact.js';
+
+/**
+ * Injeta os links de contato no HTML em tempo de build.
+ *
+ * O site é HTML estático: preencher os CTAs por JavaScript deixaria o botão
+ * mais importante da página dependendo do bundle carregar. Substituindo no
+ * build, o href sai literal no HTML publicado e a fonte da verdade continua
+ * sendo um arquivo só (src/config/contact.js).
+ */
+const contactLinks = () => ({
+  name: 'vitanova-contact-links',
+  transformIndexHtml: {
+    order: 'pre',
+    handler: (html) => html.replaceAll('%WHATSAPP_URL%', WHATSAPP_URL),
+  },
+});
 
 export default defineConfig({
+  plugins: [contactLinks()],
   root: '.',
   base: './',
   build: {
