@@ -1,53 +1,60 @@
-# Vita Nova — landing do grupo aberto
+# Vita Nova — cartão do grupo aberto
 
-Página de destino do link "grupo aberto" usado nos stories do Instagram.
-Objetivo único: entrar no grupo do WhatsApp.
+Destino do link "grupo aberto" dos stories. Objetivo único: entrar no grupo.
+
+**Não é um site — é um cartão.** Uma tela, sem rolagem, centrado. A pessoa chega
+do story, lê em três segundos e clica.
 
 ## Como visualizar
 
-É um arquivo único, sem build e sem dependências. Basta abrir:
+Arquivo único, sem build e sem dependências:
 
 ```bash
 open index.html          # macOS
 xdg-open index.html      # Linux
-```
 
-Ou servir localmente (recomendado, para o comportamento ser idêntico ao de produção):
-
-```bash
+# ou, para replicar produção:
 python3 -m http.server 8090
-# http://localhost:8090
 ```
 
-Para publicar, suba só o `index.html` — não há passo de build.
-Ele é independente do site principal e não entra no `dist/` dele.
+Para publicar, suba só o `index.html`. É independente do site principal e não
+entra no `dist/` dele.
 
 ## Decisões
 
-**Sem biblioteca de animação.** GSAP custaria ~23 KB gzip e Framer Motion exigiria
-React. Tudo aqui é feito com transições CSS, `IntersectionObserver` e `offset-path`,
-que rodam no compositor. A página inteira tem **7,7 KB gzip numa única requisição** —
-o que importa quando o tráfego vem do navegador embutido do Instagram, em rede móvel.
+**Uma tela, não uma página.** Sem seções empilhadas, sem lista de benefícios com
+checkmarks, sem CTA repetido — cada um desses é um sinal de template. O que sobrou
+é o essencial: marca, tese, prova de reconhecimento, ação.
 
-**O elemento visual não repete o diagrama do site principal.** Em vez das três
-ramificações, aqui a tese aparece como a *curva do sistema de recompensa*: picos
-violentos em terracota, cada um cobrando um vale mais fundo, que vão se
-estabilizando numa linha de base verde. O gradiente do traço conta a história
-sozinho. O caminho é gerado matematicamente (ver o script no histórico do commit) e
-fica estático no SVG, então funciona sem JavaScript.
+**Os três ângulos alternam no mesmo lugar.** Em vez de virarem três blocos que
+alongam a página, as frases de reconhecimento (geladeira, feed, insônia) se revezam
+a cada 4,2 s no mesmo ponto do cartão. Entrega os três ângulos sem custar altura.
+Com `prefers-reduced-motion` elas aparecem empilhadas e estáticas — e ainda cabe
+em uma tela.
 
-**O CTA nunca some.** Ele aparece acima da dobra em todas as telas testadas
-(inclusive 360×640) e, assim que sai de vista, uma barra fixa entra por baixo.
+**Sem biblioteca de animação.** GSAP custaria ~23 KB gzip; Framer Motion exigiria
+React. Transições CSS e um `setInterval` dão conta. A página inteira tem
+**4418 bytes gzip (10459 cru) numa única requisição** — o que importa quando o
+tráfego vem do navegador embutido do Instagram, em rede móvel.
+
+**A tese aparece como assinatura, não como diagrama.** Nada do diagrama de
+ramificações do site principal: aqui é a curva do sistema de recompensa reduzida a
+um traço fino — picos violentos em terracota que se acalmam numa linha de base
+verde. O gradiente conta a história; o path é gerado matematicamente e fica
+estático no SVG, então desenha sem JavaScript.
+
+**Acabamento.** Fundo verde-noite com respiro radial, hairlines em vez de bordas,
+duas marcas de corte nos cantos (como impresso), serifada em itálico para as falas,
+caixa alta espaçada para os rótulos. Um único acento de cor, no botão.
 
 ## Trocar a marca
 
-O monograma VN está em dois lugares no `index.html`, ambos marcados por comentário:
-o favicon (data URI no `<head>`) e o `.watermark` do bloco escuro. Quando o arquivo
-de logo definitivo chegar, é só substituir esses dois.
+O monograma VN está em dois pontos do `index.html`, ambos marcados por comentário:
+o favicon (data URI no `<head>`) e o `.mark` do cartão.
 
 ## Verificado
 
-- CTA acima da dobra e link correto em 360×640, 375×667, 390×844, 768×1024 e 1280×800
-- Barra fixa entra ao rolar; sem scroll horizontal em nenhuma largura
-- `prefers-reduced-motion`: sem animação contínua, curva já desenhada, nada oculto
-- Os 3 links apontam para o grupo correto
+- Cabe em uma tela **sem rolagem** em 360×640, 375×667, 390×844, 412×915 e 1280×800
+- CTA visível e link correto em todas; sem scroll horizontal
+- Rodízio percorre as três frases na ordem
+- `prefers-reduced-motion`: sem animação, curva já desenhada, as três frases legíveis

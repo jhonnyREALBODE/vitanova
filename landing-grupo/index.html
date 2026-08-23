@@ -3,488 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#F7F5EC">
+<meta name="theme-color" content="#0D1C05">
 <title>Vita Nova — Grupo aberto</title>
-<meta name="description" content="Comer sem fome, rolar o feed sem decidir, deitar exausta e não desligar. Parecem três problemas — são o mesmo circuito. Grupo aberto e gratuito da Vita Nova.">
-<meta name="robots" content="index, follow">
-
+<meta name="description" content="Não é falta de força de vontade. É dopamina. Grupo aberto e gratuito da Vita Nova.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Vita Nova — Grupo aberto">
-<meta property="og:description" content="Não é falta de força de vontade. É dopamina. Entre no grupo aberto e gratuito.">
+<meta property="og:description" content="Não é falta de força de vontade. É dopamina.">
 
-<!-- Monograma VN: fonte única de verdade da marca nesta página.
-     Trocar aqui (e no .mark abaixo) quando o arquivo de logo definitivo chegar. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23173404'/%3E%3Ctext x='16' y='21.5' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23EAF3DE' text-anchor='middle'%3EVN%3C/text%3E%3C/svg%3E">
+<!-- Monograma VN — fonte única da marca aqui. Trocar neste ponto e no .mark
+     quando o arquivo de logo definitivo chegar. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%230D1C05'/%3E%3Ctext x='16' y='21.5' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23EAF3DE' text-anchor='middle'%3EVN%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&display=swap">
 
 <style>
 /* ============================================================
-   Vita Nova — landing do grupo aberto
-   Mobile-first. Arquivo único, sem dependências: a maioria do
-   tráfego abre isto dentro do app do Instagram, em rede móvel.
+   Vita Nova — cartão do grupo aberto
+   Uma tela, sem rolagem. Chega do story, lê, entra.
    ============================================================ */
 :root{
-  --sand:      #F7F5EC;
-  --sand-2:    #F1EFE4;
-  --forest:    #173404;
-  --sage:      #5C8A2E;
-  --sage-deep: #3B6D11;
-  --sage-pale: #EAF3DE;
-  --terra:     #C1512B;
-  --terra-lit: #E8814F;
-  --ink:       #1B2714;
-  --muted:     #6B6A59;
-  --line:      #DED8C4;
-  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --r: 4px;
+  --night:   #0D1C05;
+  --night-2: #16300A;
+  --cream:   #F1EFE4;
+  --dim:     #A9B79A;
+  --faint:   rgba(241,239,228,.13);
+  --terra:   #C1512B;
+  --terra-l: #E8814F;
+  --sage:    #9DC97A;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 *{ box-sizing:border-box; }
-html{ -webkit-text-size-adjust:100%; }
+html,body{ height:100%; }
 body{
-  margin:0; background:var(--sand); color:var(--ink);
-  font-family:var(--sans); line-height:1.62;
+  margin:0;
+  background:var(--night);
+  color:var(--cream);
+  font-family:var(--sans);
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-  /* espaço para a barra fixa do CTA não cobrir o rodapé */
-  padding-bottom:env(safe-area-inset-bottom);
+  text-rendering:optimizeLegibility;
+  display:grid; place-items:center;
+  padding:20px 18px calc(20px + env(safe-area-inset-bottom));
+  min-height:100svh;
+  /* respiro de luz atrás do cartão */
+  background-image:
+    radial-gradient(120% 74% at 50% 24%, #1B3A0C 0%, #12280747 46%, transparent 72%);
 }
-a{ color:inherit; }
-svg{ display:block; }
-.wrap{ width:100%; max-width:640px; margin:0 auto; padding:0 22px; }
 
-.eyebrow{
-  font-size:11.5px; letter-spacing:.18em; text-transform:uppercase;
-  font-weight:600; color:var(--sage-deep); margin:0 0 14px;
+/* ---------- o cartão ---------- */
+.card{
+  width:100%; max-width:420px;
+  border:1px solid var(--faint);
+  background:linear-gradient(168deg, rgba(28,58,12,.5) 0%, rgba(13,28,5,.28) 62%);
+  padding:clamp(28px, 7vw, 40px) clamp(22px, 6vw, 34px) clamp(24px, 6vw, 32px);
+  text-align:center;
+  position:relative;
+  box-shadow:0 30px 70px -40px rgba(0,0,0,.9);
 }
-h1,h2,h3{ font-family:var(--serif); font-weight:600; letter-spacing:-.01em; margin:0; }
+/* cantos: dois fios curtos, como marca de corte de impresso */
+.card::before, .card::after{
+  content:""; position:absolute; width:26px; height:26px; pointer-events:none;
+  border:1px solid rgba(157,201,122,.34);
+}
+.card::before{ top:-1px; left:-1px; border-right:0; border-bottom:0; }
+.card::after{ bottom:-1px; right:-1px; border-left:0; border-top:0; }
 
-/* ---------- topo ---------- */
-.top{ padding:20px 0 0; }
-.brand{ display:flex; align-items:center; gap:9px; text-decoration:none; }
+/* ---------- marca ---------- */
 .mark{
-  width:30px; height:30px; border-radius:50%; background:var(--forest);
-  color:var(--sage-pale); display:grid; place-items:center; flex:0 0 auto;
-  font-family:var(--serif); font-size:12.5px; letter-spacing:.02em;
+  width:38px; height:38px; margin:0 auto; border-radius:50%;
+  border:1px solid rgba(157,201,122,.36);
+  display:grid; place-items:center;
+  font-family:var(--serif); font-size:14px; color:var(--sage);
+  letter-spacing:.04em;
 }
-.brand-name{ font-family:var(--serif); font-size:16px; color:var(--ink); }
-.brand-tag{
-  margin-left:auto; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--muted);
+.kicker{
+  margin:15px 0 0; font-size:10.5px; font-weight:500;
+  letter-spacing:.26em; text-transform:uppercase; color:var(--dim);
 }
 
-/* ---------- hero ---------- */
-.hero{ padding:38px 0 40px; }
-h1{ font-size:clamp(31px, 8.6vw, 46px); line-height:1.1; margin:0 0 20px; }
-h1 .l{ display:block; }
-h1 .accent{ color:var(--sage-deep); }
-.lede{ font-size:16.5px; color:#4A5240; margin:0 0 28px; max-width:34ch; }
-.lede b{ font-weight:600; color:var(--ink); }
+/* ---------- headline ---------- */
+h1{
+  font-family:var(--serif); font-weight:500;
+  font-size:clamp(26px, 7.4vw, 33px); line-height:1.14;
+  letter-spacing:-.015em; margin:18px 0 0;
+  text-wrap:balance;
+}
+h1 em{ font-style:italic; color:var(--sage); }
 
-/* ---------- botão ---------- */
+/* ---------- curva-assinatura ---------- */
+.sig{ margin:26px auto 0; width:min(232px, 72%); }
+.sig svg{ width:100%; height:auto; overflow:visible; display:block; }
+.sig .ln{
+  fill:none; stroke:url(#g); stroke-width:1.7;
+  stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:var(--len,700); stroke-dashoffset:var(--len,700);
+  animation:draw 2s cubic-bezier(.35,.5,.15,1) .5s forwards;
+}
+@keyframes draw{ to{ stroke-dashoffset:0; } }
+
+/* ---------- as três frases, no mesmo lugar ---------- */
+.rotor{
+  position:relative; margin:26px 0 0;
+  min-height:calc(2 * 1.5em + 2px);
+  display:grid; place-items:center;
+}
+.rotor p{
+  grid-area:1/1; margin:0; max-width:31ch;
+  font-family:var(--serif); font-style:italic; font-weight:500;
+  font-size:15.5px; line-height:1.5; color:#DCDCC9;
+  opacity:0; transform:translateY(6px);
+  transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1);
+}
+.rotor p.on{ opacity:1; transform:none; }
+.tieline{
+  margin:14px 0 0; font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--dim);
+}
+.tieline b{ color:var(--sage); font-weight:500; }
+
+/* ---------- ação ---------- */
+.rule{ height:1px; background:var(--faint); margin:24px 0 22px; }
 .cta{
   position:relative; overflow:hidden;
-  display:flex; align-items:center; justify-content:center; gap:10px;
-  width:100%; padding:17px 22px;
-  background:var(--terra); color:#FDF3EE;
-  font-family:var(--sans); font-size:15.5px; font-weight:600;
-  text-decoration:none; border:0; border-radius:var(--r);
-  box-shadow:0 8px 22px -12px rgba(120,44,18,.75);
-  transition:background-color .2s ease, transform .12s ease, box-shadow .25s ease;
+  display:flex; align-items:center; justify-content:center; gap:9px;
+  padding:16px 20px; width:100%;
+  background:var(--terra); color:#FFF6F1;
+  font-family:var(--sans); font-size:14.5px; font-weight:500;
+  letter-spacing:.01em; text-decoration:none; border-radius:2px;
+  transition:background-color .22s ease, transform .12s ease;
   -webkit-tap-highlight-color:transparent;
 }
-.cta:hover{ background:#D0592F; box-shadow:0 12px 26px -12px rgba(120,44,18,.85); }
-.cta:active{ transform:translateY(1px) scale(.995); }
-.cta .arrow{ transition:transform .28s cubic-bezier(.2,.7,.3,1); }
-.cta:hover .arrow{ transform:translateX(4px); }
-/* brilho que percorre o botão — só uma vez, ao entrar na tela */
+.cta:hover{ background:#CF5A2F; }
+.cta:active{ transform:translateY(1px); }
+.cta .arw{ transition:transform .3s cubic-bezier(.2,.7,.3,1); }
+.cta:hover .arw{ transform:translateX(3px); }
 .cta::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background:linear-gradient(105deg, transparent 30%, rgba(255,255,255,.26) 48%, transparent 66%);
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(105deg, transparent 32%, rgba(255,255,255,.22) 50%, transparent 68%);
   transform:translateX(-130%);
+  animation:shine 1.3s cubic-bezier(.3,.7,.4,1) 1.5s 1 both;
 }
-.cta.shine::after{ animation:shine 1.15s cubic-bezier(.3,.7,.4,1) .35s 1 both; }
 @keyframes shine{ to{ transform:translateX(130%); } }
+.note{
+  margin:12px 0 0; font-size:11.5px; color:#8D9B7E;
+  letter-spacing:.02em;
+}
+.sign{
+  margin:20px 0 0; font-size:10px; letter-spacing:.24em;
+  text-transform:uppercase; color:#5F6E52; text-decoration:none;
+  display:inline-block;
+}
+.sign:hover{ color:var(--sage); }
 
-.fineprint{
-  margin:12px 0 0; font-size:12.8px; color:var(--muted); text-align:center;
-}
+/* ---------- entrada ---------- */
+.up{ opacity:0; transform:translateY(11px); animation:up .85s cubic-bezier(.2,.7,.3,1) forwards; }
+.u1{ animation-delay:.05s } .u2{ animation-delay:.16s } .u3{ animation-delay:.28s }
+.u4{ animation-delay:.42s } .u5{ animation-delay:.56s } .u6{ animation-delay:.68s }
+@keyframes up{ to{ opacity:1; transform:none; } }
 
-/* ---------- bloco escuro: o mecanismo ---------- */
-.mech{
-  position:relative; overflow:hidden;
-  background:var(--forest); color:var(--sage-pale);
-  padding:52px 0 46px; margin:8px 0 0;
-}
-.mech .eyebrow{ color:#9DC97A; }
-.mech h2{ font-size:clamp(23px,6.2vw,30px); line-height:1.2; margin:0 0 16px; color:#F2F5E9; }
-.mech p{ font-size:15.5px; color:#C3CFB3; margin:0; max-width:38ch; }
-.mech .watermark{
-  display:none;   /* só a partir de 700px, onde há coluna livre à direita */
-  position:absolute; right:26px; top:26px; width:168px; height:168px;
-  opacity:.05; pointer-events:none; will-change:transform;
-}
+:focus-visible{ outline:1.5px solid var(--terra-l); outline-offset:3px; }
 
-/* curva */
-.curve-wrap{ margin:30px 0 0; }
-.curve{ width:100%; height:auto; overflow:visible; }
-.curve .line{
-  fill:none; stroke:url(#grad); stroke-width:2.2;
-  stroke-linecap:round; stroke-linejoin:round;
-  stroke-dasharray:var(--len); stroke-dashoffset:var(--len);
-}
-.mech.in .curve .line{ transition:stroke-dashoffset 1.9s cubic-bezier(.35,.5,.2,1) .12s; stroke-dashoffset:0; }
-.curve .area{ fill:url(#fade); opacity:0; }
-.mech.in .curve .area{ transition:opacity 1s ease 1.1s; opacity:1; }
-.curve .axis{ stroke:rgba(234,243,222,.16); stroke-width:1; stroke-dasharray:2 5; }
-.spark{
-  fill:#F2F5E9;
-  offset-path:path("M14.0 58.0 L17.0 43.3 L20.1 35.0 L23.1 29.9 L26.2 27.6 L29.2 28.3 L32.2 31.9 L35.3 38.2 L38.3 47.4 L41.4 64.5 L44.4 76.7 L47.5 84.8 L50.5 90.2 L53.5 93.2 L56.6 93.5 L59.6 91.5 L62.7 87.1 L65.7 80.3 L68.8 69.9 L71.8 55.2 L74.8 47.8 L77.9 43.2 L80.9 40.8 L84.0 40.6 L87.0 42.5 L90.0 46.3 L93.1 52.1 L96.1 59.6 L99.2 69.8 L102.2 84.1 L105.2 91.9 L108.3 97.5 L111.3 101.2 L114.4 103.2 L117.4 103.6 L120.5 102.6 L123.5 100.2 L126.5 96.5 L129.6 91.6 L132.6 84.5 L135.7 75.3 L138.7 70.9 L141.8 68.0 L144.8 66.4 L147.8 66.0 L150.9 66.5 L153.9 68.0 L157.0 70.3 L160.0 73.2 L163.0 76.8 L166.1 81.0 L169.1 86.5 L172.2 93.1 L175.2 96.4 L178.2 98.6 L181.3 100.0 L184.3 100.5 L187.4 100.3 L190.4 99.5 L193.5 98.2 L196.5 96.4 L199.5 94.1 L202.6 91.5 L205.6 88.7 L208.7 85.3 L211.7 80.6 L214.8 77.4 L217.8 75.0 L220.8 72.9 L223.9 71.2 L226.9 69.7 L230.0 68.5 L233.0 67.4 L236.0 66.6 L239.1 65.8 L242.1 65.2 L245.2 64.7 L248.2 64.3 L251.2 64.1 L254.3 63.9 L257.3 64.0 L260.4 64.8 L263.4 64.9 L266.5 64.7 L269.5 64.4 L272.5 64.0 L275.6 63.6 L278.6 63.1 L281.7 62.5 L284.7 62.0 L287.8 61.4 L290.8 60.7 L293.8 60.1 L296.9 59.5 L299.9 58.9 L303.0 58.3 L306.0 57.8");
-  offset-rotate:0deg;
-  animation:travel 9s linear infinite;
-  opacity:0;
-}
-.mech.in .spark{ opacity:.95; transition:opacity .5s ease 1.4s; }
-@keyframes travel{ from{ offset-distance:0%; } to{ offset-distance:100%; } }
-
-.curve-legend{
-  display:flex; justify-content:space-between; gap:12px;
-  margin:10px 2px 0; font-size:11.5px; letter-spacing:.06em;
-  text-transform:uppercase; color:#8FA37B;
-}
-.curve-legend span:last-child{ color:#9DC97A; }
-
-/* ---------- os três reconhecimentos ---------- */
-.signals{ padding:52px 0 8px; }
-.signals > .eyebrow{ margin-bottom:20px; }
-.sig{
-  border-top:1px solid var(--line);
-  padding:26px 0 24px;
-}
-.sig:last-of-type{ border-bottom:1px solid var(--line); }
-.sig .n{
-  font-family:var(--serif); font-size:13px; color:var(--terra);
-  display:block; margin:0 0 8px;
-}
-.sig h3{ font-size:20.5px; line-height:1.24; margin:0 0 9px; }
-.sig p{ font-size:15px; color:var(--muted); margin:0; }
-.sig .tie{ color:var(--sage-deep); font-weight:500; }
-
-/* ---------- o que tem no grupo ---------- */
-.inside{ padding:44px 0 8px; }
-.inside h2{ font-size:clamp(22px,5.8vw,28px); line-height:1.22; margin:0 0 22px; }
-.list{ list-style:none; margin:0; padding:0; }
-.list li{
-  display:grid; grid-template-columns:auto 1fr; gap:13px;
-  padding:14px 0; font-size:15px; color:#4A5240;
-}
-.list li + li{ border-top:1px solid var(--line); }
-.tick{
-  width:19px; height:19px; margin-top:3px; border-radius:50%;
-  background:var(--sage-pale); display:grid; place-items:center; flex:0 0 auto;
-}
-.tick svg{ width:10px; height:10px; }
-
-/* ---------- fechamento ---------- */
-.close{
-  background:var(--sand-2); border-top:1px solid var(--line);
-  margin-top:46px; padding:48px 0 44px; text-align:center;
-}
-.close h2{ font-size:clamp(23px,6vw,30px); line-height:1.22; margin:0 auto 14px; max-width:19ch; }
-.close p{ font-size:15.5px; color:var(--muted); margin:0 auto 26px; max-width:33ch; }
-
-footer{ padding:26px 0 96px; text-align:center; font-size:12.5px; color:var(--muted); background:var(--sand-2); }
-footer a{ text-decoration:none; }
-footer a:hover{ color:var(--sage-deep); }
-
-/* ---------- barra fixa do CTA ---------- */
-.dock{
-  position:fixed; left:0; right:0; bottom:0; z-index:40;
-  padding:11px 16px calc(11px + env(safe-area-inset-bottom));
-  background:rgba(247,245,236,.93);
-  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-  border-top:1px solid var(--line);
-  transform:translateY(120%);
-  transition:transform .38s cubic-bezier(.2,.75,.3,1);
-}
-.dock.show{ transform:none; }
-.dock .cta{ max-width:640px; margin:0 auto; padding:15px 22px; }
-
-/* ---------- entrada e reveal ---------- */
-.rise{
-  opacity:0; transform:translateY(15px);
-  clip-path:inset(0 0 12% 0);
-  transition:opacity .78s cubic-bezier(.2,.7,.3,1), transform .78s cubic-bezier(.2,.7,.3,1), clip-path .78s cubic-bezier(.2,.7,.3,1);
-}
-.rise.in{ opacity:1; transform:none; clip-path:inset(0 0 0 0); }
-.d1{ transition-delay:.06s; } .d2{ transition-delay:.14s; } .d3{ transition-delay:.22s; }
-.d4{ transition-delay:.30s; } .d5{ transition-delay:.38s; }
-
-:focus-visible{ outline:2px solid var(--terra); outline-offset:3px; border-radius:2px; }
-
-@media (min-width:700px){
-  .wrap{ max-width:720px; padding:0 32px; }
-  .hero{ padding:56px 0 56px; }
-  .cta{ width:auto; min-width:290px; padding:18px 34px; }
-  .cta-row{ display:flex; flex-direction:column; align-items:flex-start; }
-  .fineprint{ text-align:left; }
-  .close .cta{ margin:0 auto; }
-  .close .fineprint{ text-align:center; }
-  .mech .watermark{ display:block; }
+/* telas muito baixas: deixa rolar em vez de espremer */
+@media (max-height:620px){
+  body{ place-items:start center; padding-top:14px; }
+  h1{ font-size:clamp(23px,6.6vw,28px); }
+  .sig{ margin-top:16px; } .rotor{ margin-top:16px; }
+  .rule{ margin:18px 0 16px; }
 }
 
-/* ---------- acessibilidade: sem animação contínua ---------- */
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:.001ms !important; animation-iteration-count:1 !important;
      transition-duration:.001ms !important; }
-  .rise{ opacity:1; transform:none; clip-path:none; }
-  .curve .line{ stroke-dashoffset:0; }
-  .curve .area{ opacity:1; }
-  .spark{ display:none; }
-  .dock{ transform:none; }
+  .up{ opacity:1; transform:none; }
+  .sig .ln{ stroke-dashoffset:0; }
+  .cta::after{ display:none; }
+  /* sem rodízio: as três frases ficam visíveis, empilhadas */
+  .rotor{ display:block; min-height:0; }
+  .rotor p{ opacity:1; transform:none; margin:0 auto 8px; }
 }
 </style>
 </head>
 <body>
 
-<header class="top">
-  <div class="wrap">
-    <a class="brand rise" href="https://instagram.com/oficial.vitanova">
-      <span class="mark">VN</span>
-      <span class="brand-name">Vita Nova</span>
-      <span class="brand-tag">Grupo aberto</span>
-    </a>
-  </div>
-</header>
+<main class="card">
+  <div class="mark up u1" aria-label="Vita Nova">VN</div>
+  <p class="kicker up u2">Grupo aberto</p>
 
-<main>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <p class="eyebrow rise d1">Gratuito · sem compromisso</p>
-      <h1>
-        <span class="l rise d2">Não é falta de</span>
-        <span class="l rise d3">força de vontade.</span>
-        <span class="l accent rise d4">É dopamina.</span>
-      </h1>
-      <p class="lede rise d5">
-        Comer sem fome, rolar o feed sem decidir, deitar exausta e não conseguir desligar.
-        Parecem três problemas diferentes. <b>São o mesmo circuito.</b>
-      </p>
-      <div class="cta-row rise d5">
-        <a class="cta" id="cta-hero" href="https://chat.whatsapp.com/HAJnhpcILgOICLp3uyN0o3?s=cl&amp;p=i&amp;mlu=0">
-          Entrar no grupo aberto
-          <svg class="arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
-        </a>
-        <p class="fineprint">Você entra, acompanha — e sai quando quiser</p>
-      </div>
-    </div>
-  </section>
+  <h1 class="up u3">Não é falta de força de vontade.<br><em>É dopamina.</em></h1>
 
-  <!-- O MECANISMO -->
-  <section class="mech" id="mech">
-    <svg class="watermark" viewBox="0 0 32 32" aria-hidden="true">
-      <circle cx="16" cy="16" r="16" fill="#EAF3DE"/>
-      <text x="16" y="21.5" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#173404" text-anchor="middle">VN</text>
+  <figure class="sig up u4">
+    <svg viewBox="0 0 240 44" role="img" aria-label="Curva do sistema de recompensa: picos altos que vão se estabilizando numa linha de base.">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#E8814F"/>
+          <stop offset="52%" stop-color="#C08A42"/>
+          <stop offset="100%" stop-color="#9DC97A"/>
+        </linearGradient>
+      </defs>
+      <path class="ln" id="curva" d="M2.0 20.0 L5.3 13.9 L8.6 10.2 L11.8 7.6 L15.1 6.1 L18.4 5.5 L21.7 5.9 L24.9 7.3 L28.2 9.6 L31.5 12.8 L34.8 17.0 L38.1 24.0 L41.3 28.9 L44.6 32.5 L47.9 35.1 L51.2 37.0 L54.4 38.0 L57.7 38.3 L61.0 37.8 L64.3 36.8 L67.6 35.1 L70.8 32.9 L74.1 30.1 L77.4 25.2 L80.7 22.2 L83.9 20.3 L87.2 19.0 L90.5 18.4 L93.8 18.2 L97.1 18.6 L100.3 19.3 L103.6 20.5 L106.9 21.9 L110.2 23.6 L113.4 25.5 L116.7 27.6 L120.0 30.1 L123.3 33.4 L126.6 35.2 L129.8 36.5 L133.1 37.3 L136.4 37.9 L139.7 38.1 L142.9 38.0 L146.2 37.7 L149.5 37.1 L152.8 36.3 L156.1 35.4 L159.3 34.4 L162.6 33.2 L165.9 32.0 L169.2 30.7 L172.4 29.3 L175.7 27.6 L179.0 26.3 L182.3 25.2 L185.6 24.2 L188.8 23.4 L192.1 22.6 L195.4 21.8 L198.7 21.1 L201.9 20.5 L205.2 19.9 L208.5 19.4 L211.8 18.9 L215.1 18.5 L218.3 18.1 L221.6 17.9 L224.9 17.7 L228.2 17.6 L231.4 17.7 L234.7 17.8 L238.0 18.0"/>
     </svg>
-    <div class="wrap">
-      <p class="eyebrow rise">O mecanismo</p>
-      <h2 class="rise d1">Todo pico rápido cobra o troco depois.</h2>
-      <p class="rise d2">
-        O estímulo fácil entrega dopamina acima da conta. O corpo compensa baixando a régua.
-        Aí o que bastava ontem não basta mais hoje — e a vontade volta maior.
-        Não é caráter. É ajuste.
-      </p>
+  </figure>
 
-      <div class="curve-wrap rise d3">
-        <svg class="curve" viewBox="0 0 320 128" role="img"
-             aria-label="Curva do sistema de recompensa: picos altos e vales fundos que vão se estabilizando numa linha de base saudável.">
-          <defs>
-            <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stop-color="#E8814F"/>
-              <stop offset="46%"  stop-color="#C9863F"/>
-              <stop offset="78%"  stop-color="#7FA83F"/>
-              <stop offset="100%" stop-color="#9DDB6A"/>
-            </linearGradient>
-            <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#9DDB6A" stop-opacity=".17"/>
-              <stop offset="100%" stop-color="#9DDB6A" stop-opacity="0"/>
-            </linearGradient>
-            <!-- desvanece as pontas: sem isto o preenchimento termina
-                 num corte reto vertical nas duas bordas -->
-            <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="4%"  stop-color="#fff" stop-opacity="0"/>
-              <stop offset="13%" stop-color="#fff" stop-opacity="1"/>
-              <stop offset="82%" stop-color="#fff" stop-opacity="1"/>
-              <stop offset="96%" stop-color="#fff" stop-opacity="0"/>
-            </linearGradient>
-            <mask id="edgeMask"><rect x="0" y="0" width="320" height="128" fill="url(#edge)"/></mask>
-          </defs>
-          <line class="axis" x1="14" y1="58" x2="306" y2="58"/>
-          <path class="area" mask="url(#edgeMask)" d="M14.0 58.0 L17.0 43.3 L20.1 35.0 L23.1 29.9 L26.2 27.6 L29.2 28.3 L32.2 31.9 L35.3 38.2 L38.3 47.4 L41.4 64.5 L44.4 76.7 L47.5 84.8 L50.5 90.2 L53.5 93.2 L56.6 93.5 L59.6 91.5 L62.7 87.1 L65.7 80.3 L68.8 69.9 L71.8 55.2 L74.8 47.8 L77.9 43.2 L80.9 40.8 L84.0 40.6 L87.0 42.5 L90.0 46.3 L93.1 52.1 L96.1 59.6 L99.2 69.8 L102.2 84.1 L105.2 91.9 L108.3 97.5 L111.3 101.2 L114.4 103.2 L117.4 103.6 L120.5 102.6 L123.5 100.2 L126.5 96.5 L129.6 91.6 L132.6 84.5 L135.7 75.3 L138.7 70.9 L141.8 68.0 L144.8 66.4 L147.8 66.0 L150.9 66.5 L153.9 68.0 L157.0 70.3 L160.0 73.2 L163.0 76.8 L166.1 81.0 L169.1 86.5 L172.2 93.1 L175.2 96.4 L178.2 98.6 L181.3 100.0 L184.3 100.5 L187.4 100.3 L190.4 99.5 L193.5 98.2 L196.5 96.4 L199.5 94.1 L202.6 91.5 L205.6 88.7 L208.7 85.3 L211.7 80.6 L214.8 77.4 L217.8 75.0 L220.8 72.9 L223.9 71.2 L226.9 69.7 L230.0 68.5 L233.0 67.4 L236.0 66.6 L239.1 65.8 L242.1 65.2 L245.2 64.7 L248.2 64.3 L251.2 64.1 L254.3 63.9 L257.3 64.0 L260.4 64.8 L263.4 64.9 L266.5 64.7 L269.5 64.4 L272.5 64.0 L275.6 63.6 L278.6 63.1 L281.7 62.5 L284.7 62.0 L287.8 61.4 L290.8 60.7 L293.8 60.1 L296.9 59.5 L299.9 58.9 L303.0 58.3 L306.0 57.8 L306.0 118 L14.0 118 Z"/>
-          <path class="line" id="curva" d="M14.0 58.0 L17.0 43.3 L20.1 35.0 L23.1 29.9 L26.2 27.6 L29.2 28.3 L32.2 31.9 L35.3 38.2 L38.3 47.4 L41.4 64.5 L44.4 76.7 L47.5 84.8 L50.5 90.2 L53.5 93.2 L56.6 93.5 L59.6 91.5 L62.7 87.1 L65.7 80.3 L68.8 69.9 L71.8 55.2 L74.8 47.8 L77.9 43.2 L80.9 40.8 L84.0 40.6 L87.0 42.5 L90.0 46.3 L93.1 52.1 L96.1 59.6 L99.2 69.8 L102.2 84.1 L105.2 91.9 L108.3 97.5 L111.3 101.2 L114.4 103.2 L117.4 103.6 L120.5 102.6 L123.5 100.2 L126.5 96.5 L129.6 91.6 L132.6 84.5 L135.7 75.3 L138.7 70.9 L141.8 68.0 L144.8 66.4 L147.8 66.0 L150.9 66.5 L153.9 68.0 L157.0 70.3 L160.0 73.2 L163.0 76.8 L166.1 81.0 L169.1 86.5 L172.2 93.1 L175.2 96.4 L178.2 98.6 L181.3 100.0 L184.3 100.5 L187.4 100.3 L190.4 99.5 L193.5 98.2 L196.5 96.4 L199.5 94.1 L202.6 91.5 L205.6 88.7 L208.7 85.3 L211.7 80.6 L214.8 77.4 L217.8 75.0 L220.8 72.9 L223.9 71.2 L226.9 69.7 L230.0 68.5 L233.0 67.4 L236.0 66.6 L239.1 65.8 L242.1 65.2 L245.2 64.7 L248.2 64.3 L251.2 64.1 L254.3 63.9 L257.3 64.0 L260.4 64.8 L263.4 64.9 L266.5 64.7 L269.5 64.4 L272.5 64.0 L275.6 63.6 L278.6 63.1 L281.7 62.5 L284.7 62.0 L287.8 61.4 L290.8 60.7 L293.8 60.1 L296.9 59.5 L299.9 58.9 L303.0 58.3 L306.0 57.8"/>
-          <circle class="spark" r="3.1"/>
-        </svg>
-        <div class="curve-legend">
-          <span>estímulo rápido</span>
-          <span>linha de base</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- OS TRÊS RECONHECIMENTOS -->
-  <section class="signals">
-    <div class="wrap">
-      <p class="eyebrow rise">Três hábitos, uma raiz</p>
-
-      <article class="sig rise">
-        <span class="n">01</span>
-        <h3>Você já comeu.</h3>
-        <p>
-          Não está com fome. Mas abre a geladeira, olha, fecha — e volta dez minutos depois.
-          <span class="tie">Isso tem mecanismo, e não é gula.</span> No grupo, a primeira coisa
-          que a gente faz é dar nome a esse ciclo.
-        </p>
-      </article>
-
-      <article class="sig rise">
-        <span class="n">02</span>
-        <h3>O dedo subiu antes de você decidir.</h3>
-        <p>
-          O vídeo acabou e o próximo já estava rolando. Você não escolheu, só continuou.
-          <span class="tie">É o mesmo circuito da geladeira</span>, com outro estímulo — e é por
-          isso que cortar um de cada vez raramente para de pé.
-        </p>
-      </article>
-
-      <article class="sig rise">
-        <span class="n">03</span>
-        <h3>Cansada o dia inteiro. Desperta às 23h.</h3>
-        <p>
-          Deita, apaga a luz, e a cabeça liga. Uma noite mal dormida desregula no dia seguinte
-          exatamente os hormônios que controlam a fome.
-          <span class="tie">O ciclo se fecha sozinho</span> — e é aí que a maioria desiste,
-          achando que o problema é ela.
-        </p>
-      </article>
-    </div>
-  </section>
-
-  <!-- O QUE TEM LÁ DENTRO -->
-  <section class="inside">
-    <div class="wrap">
-      <h2 class="rise">O que acontece no grupo</h2>
-      <ul class="list">
-        <li class="rise d1">
-          <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#3B6D11" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-          <span>Explicações curtas do mecanismo — por que a vontade aparece na hora exata em que aparece.</span>
-        </li>
-        <li class="rise d2">
-          <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#3B6D11" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-          <span>Ajustes que cabem numa rotina real, não numa rotina ideal de fim de semana.</span>
-        </li>
-        <li class="rise d3">
-          <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#3B6D11" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-          <span>Espaço para perguntar e acompanhar quem está passando pelo mesmo processo.</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- FECHAMENTO -->
-  <section class="close">
-    <div class="wrap">
-      <h2 class="rise">O primeiro passo é entender o que está acontecendo.</h2>
-      <p class="rise d1">O grupo é aberto e gratuito. Entra, acompanha, e decide depois se faz sentido pra você.</p>
-      <div class="rise d2">
-        <a class="cta" href="https://chat.whatsapp.com/HAJnhpcILgOICLp3uyN0o3?s=cl&amp;p=i&amp;mlu=0">
-          Entrar no grupo aberto
-          <svg class="arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap">
-    Vita Nova — recalibre a causa, não o sintoma.<br>
-    <a href="https://instagram.com/oficial.vitanova">@oficial.vitanova</a>
+  <div class="rotor up u5" aria-live="off">
+    <p class="on">“Você já comeu. E abre a geladeira mesmo assim.”</p>
+    <p>“O vídeo acabou — e o dedo já tinha subido.”</p>
+    <p>“Cansada o dia inteiro. Desperta às 23h.”</p>
   </div>
-</footer>
+  <p class="tieline up u5">Três hábitos · <b>um circuito</b></p>
 
-<!-- CTA sempre ao alcance: entra quando o botão do hero sai da tela -->
-<div class="dock" id="dock">
-  <a class="cta" href="https://chat.whatsapp.com/HAJnhpcILgOICLp3uyN0o3?s=cl&amp;p=i&amp;mlu=0">
-    Entrar no grupo aberto
-    <svg class="arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+  <div class="rule up u6"></div>
+
+  <a class="cta up u6" href="https://chat.whatsapp.com/HAJnhpcILgOICLp3uyN0o3?s=cl&amp;p=i&amp;mlu=0">
+    Entrar no grupo
+    <svg class="arw" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
   </a>
-</div>
+  <p class="note up u6">Gratuito · você sai quando quiser</p>
+
+  <a class="sign up u6" href="https://instagram.com/oficial.vitanova">@oficial.vitanova</a>
+</main>
 
 <script>
 (function () {
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // comprimento real da curva -> alimenta o dash do desenho progressivo
-  var line = document.getElementById('curva');
-  if (line && line.getTotalLength) {
-    var len = Math.ceil(line.getTotalLength());
-    document.querySelector('.curve').style.setProperty('--len', len);
+  // comprimento real do traço, para o desenho progressivo
+  var ln = document.getElementById('curva');
+  if (ln && ln.getTotalLength) {
+    document.querySelector('.sig').style.setProperty('--len', Math.ceil(ln.getTotalLength()));
   }
 
-  if (reduce || !('IntersectionObserver' in window)) {
-    document.querySelectorAll('.rise').forEach(function (el) { el.classList.add('in'); });
-    var m = document.getElementById('mech'); if (m) m.classList.add('in');
-    return;
-  }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // entrada do hero: dispara no primeiro frame, sem esperar scroll
-  requestAnimationFrame(function () {
-    document.querySelectorAll('.hero .rise, .top .rise').forEach(function (el) { el.classList.add('in'); });
-    var c = document.getElementById('cta-hero'); if (c) c.classList.add('shine');
-  });
-
-  // reveal do restante
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    });
-  }, { threshold: .18, rootMargin: '0px 0px -6% 0px' });
-
-  document.querySelectorAll('main .rise:not(.hero .rise), #mech').forEach(function (el) { io.observe(el); });
-
-  // barra fixa: aparece quando o CTA do hero sai de vista
-  var dock = document.getElementById('dock');
-  var heroCta = document.getElementById('cta-hero');
-  if (dock && heroCta) {
-    new IntersectionObserver(function (entries) {
-      dock.classList.toggle('show', !entries[0].isIntersecting);
-    }, { threshold: 0 }).observe(heroCta);
-  }
-
-  // parallax discreto do monograma no bloco escuro (só transform, sem layout)
-  var wm = document.querySelector('.watermark');
-  var mech = document.getElementById('mech');
-  if (wm && mech && matchMedia('(min-width: 700px)').matches) {
-    var ticking = false;
-    addEventListener('scroll', function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        var r = mech.getBoundingClientRect();
-        var p = (innerHeight - r.top) / (innerHeight + r.height);
-        wm.style.transform = 'translate3d(0,' + ((p - .5) * 46).toFixed(1) + 'px,0)';
-        ticking = false;
-      });
-    }, { passive: true });
-  }
+  // rodízio das três frases: cada ângulo tem seu tempo de leitura
+  var frases = document.querySelectorAll('.rotor p');
+  if (frases.length < 2) return;
+  var i = 0;
+  setInterval(function () {
+    if (document.hidden) return;
+    frases[i].classList.remove('on');
+    i = (i + 1) % frases.length;
+    frases[i].classList.add('on');
+  }, 4200);
 })();
 </script>
 </body>
