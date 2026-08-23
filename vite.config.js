@@ -13,9 +13,25 @@ const contactLinks = () => ({
   name: 'vitanova-contact-links',
   transformIndexHtml: {
     order: 'pre',
-    handler: (html) => html.replaceAll('%WHATSAPP_URL%', WHATSAPP_URL),
+    handler: (html) =>
+      html
+        .replaceAll('%WHATSAPP_URL%', WHATSAPP_URL)
+        // Carimbo de build: permite abrir o site publicado, ver o fonte e
+        // saber na hora QUAL versão está no ar — sem isso, "o deploy não
+        // subiu" e "o navegador está com cache" são indistinguíveis.
+        .replaceAll('%BUILD_ID%', buildId()),
   },
 });
+
+function buildId() {
+  const when = new Date().toISOString().slice(0, 16).replace('T', ' ') + 'Z';
+  const sha =
+    process.env.WORKERS_CI_COMMIT_SHA ||
+    process.env.CF_PAGES_COMMIT_SHA ||
+    process.env.GIT_COMMIT_SHA ||
+    '';
+  return sha ? `${when} ${sha.slice(0, 7)}` : when;
+}
 
 export default defineConfig({
   plugins: [contactLinks()],
