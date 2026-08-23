@@ -57,8 +57,10 @@ automatically configured. Please update the Vite version to at least "6.0.0"
 ```
 
 Com o arquivo presente não há nada a detectar: o wrangler apenas publica
-`dist/`. O `name` em `wrangler.jsonc` precisa bater com o nome do Worker no
-painel (hoje `vitanova1`) — se renomear o Worker, atualize lá também.
+`dist/`. O `name` em `wrangler.jsonc` precisa bater com o nome do Worker no painel
+(hoje `vitanovasite`, publicado em vitanovasite.joaoreche9.workers.dev) — se
+renomear o Worker, atualize lá também. Divergir faz o `npm run deploy` local
+publicar num Worker paralelo em vez de atualizar o site.
 
 O `wrangler` está fixado como devDependency para o deploy usar sempre a mesma
 versão, em vez de baixar a mais recente a cada build.

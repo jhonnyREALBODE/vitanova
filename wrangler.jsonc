@@ -11,8 +11,11 @@
   // Com este arquivo presente não há nada a detectar: o wrangler apenas
   // publica o conteúdo de dist/ como assets estáticos.
   //
-  // `name` precisa bater com o nome do Worker no painel da Cloudflare.
-  "name": "vitanova1",
+  // `name` precisa bater com o nome do Worker no painel da Cloudflare:
+  // hoje `vitanovasite`, servido em vitanovasite.joaoreche9.workers.dev.
+  // Divergir aqui faz o `npm run deploy` local publicar num Worker
+  // paralelo, em vez de atualizar o site.
+  "name": "vitanovasite",
   "compatibility_date": "2025-09-01",
 
   "assets": {
