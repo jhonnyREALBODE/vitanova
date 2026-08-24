@@ -3,17 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1C05">
+<meta name="theme-color" content="#08150B">
 <title>Vita Nova — Grupo aberto</title>
-<meta name="description" content="Não é falta de força de vontade. É dopamina. Grupo aberto e gratuito da Vita Nova.">
+<meta name="description" content="Comer sem fome, rolar sem decidir, não desligar à noite. Não é fraqueza — é um circuito. Grupo aberto e gratuito da Vita Nova.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Vita Nova — Grupo aberto">
-<meta property="og:description" content="Não é falta de força de vontade. É dopamina.">
+<meta property="og:description" content="A partir daqui, para de ser culpa sua.">
 
-<!-- Monograma VN — fonte única da marca aqui. Trocar neste ponto e no .mark
-     quando o arquivo de logo definitivo chegar. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%230D1C05'/%3E%3Ctext x='16' y='21.5' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23EAF3DE' text-anchor='middle'%3EVN%3C/text%3E%3C/svg%3E">
+<!-- Monograma VN — trocar aqui e no .mark quando a logo definitiva chegar. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2308150B'/%3E%3Ctext x='16' y='21.5' font-family='Georgia,serif' font-size='13' font-weight='600' fill='%23EAF3DE' text-anchor='middle'%3EVN%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,117 +21,97 @@
 <style>
 /* ============================================================
    Vita Nova — cartão do grupo aberto
-   Uma tela, sem rolagem. Chega do story, lê, entra.
+   Uma tela. Três correntes de partículas convergem para um núcleo:
+   a tese em movimento, não em diagrama.
    ============================================================ */
 :root{
-  --night:   #0D1C05;
-  --night-2: #16300A;
-  --cream:   #F1EFE4;
-  --dim:     #A9B79A;
-  --faint:   rgba(241,239,228,.13);
-  --terra:   #C1512B;
-  --terra-l: #E8814F;
-  --sage:    #9DC97A;
+  --night:  #08150B;
+  --cream:  #F1EFE4;
+  --dim:    #A3B396;
+  --faint:  rgba(241,239,228,.12);
+  --terra:  #C1512B;
+  --sage:   #9DC97A;
   --serif: 'Playfair Display', Georgia, serif;
   --sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
 body{
-  margin:0;
-  background:var(--night);
-  color:var(--cream);
-  font-family:var(--sans);
-  -webkit-font-smoothing:antialiased;
+  margin:0; background:var(--night); color:var(--cream);
+  font-family:var(--sans); -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
   display:grid; place-items:center;
   padding:20px 18px calc(20px + env(safe-area-inset-bottom));
-  min-height:100svh;
-  /* respiro de luz atrás do cartão */
-  background-image:
-    radial-gradient(120% 74% at 50% 24%, #1B3A0C 0%, #12280747 46%, transparent 72%);
+  min-height:100svh; overflow:hidden;
 }
 
-/* ---------- o cartão ---------- */
-.card{
-  width:100%; max-width:420px;
-  border:1px solid var(--faint);
-  background:linear-gradient(168deg, rgba(28,58,12,.5) 0%, rgba(13,28,5,.28) 62%);
-  padding:clamp(28px, 7vw, 40px) clamp(22px, 6vw, 34px) clamp(24px, 6vw, 32px);
-  text-align:center;
-  position:relative;
-  box-shadow:0 30px 70px -40px rgba(0,0,0,.9);
+/* a cena fica atrás de tudo e nunca intercepta o toque */
+#scene{
+  position:fixed; inset:0; z-index:0; display:block;
+  width:100%; height:100%; pointer-events:none;
 }
-/* cantos: dois fios curtos, como marca de corte de impresso */
-.card::before, .card::after{
-  content:""; position:absolute; width:26px; height:26px; pointer-events:none;
-  border:1px solid rgba(157,201,122,.34);
+
+.card{
+  position:relative; z-index:1;
+  width:100%; max-width:412px; text-align:center;
+  padding:clamp(26px,6.5vw,36px) clamp(20px,5.5vw,30px) clamp(22px,5.5vw,28px);
+  border:1px solid var(--faint);
+  /* translúcido de propósito: o núcleo respira através do cartão */
+  background:linear-gradient(170deg, rgba(11,29,13,.55) 0%, rgba(6,17,8,.74) 100%);
+}
+.card::before,.card::after{
+  content:""; position:absolute; width:24px; height:24px; pointer-events:none;
+  border:1px solid rgba(157,201,122,.32);
 }
 .card::before{ top:-1px; left:-1px; border-right:0; border-bottom:0; }
 .card::after{ bottom:-1px; right:-1px; border-left:0; border-top:0; }
 
-/* ---------- marca ---------- */
 .mark{
-  width:38px; height:38px; margin:0 auto; border-radius:50%;
-  border:1px solid rgba(157,201,122,.36);
-  display:grid; place-items:center;
-  font-family:var(--serif); font-size:14px; color:var(--sage);
-  letter-spacing:.04em;
+  width:36px; height:36px; margin:0 auto; border-radius:50%;
+  border:1px solid rgba(157,201,122,.34); display:grid; place-items:center;
+  font-family:var(--serif); font-size:13.5px; color:var(--sage); letter-spacing:.04em;
 }
 .kicker{
-  margin:15px 0 0; font-size:10.5px; font-weight:500;
+  margin:14px 0 0; font-size:10.5px; font-weight:500;
   letter-spacing:.26em; text-transform:uppercase; color:var(--dim);
 }
 
-/* ---------- headline ---------- */
 h1{
   font-family:var(--serif); font-weight:500;
-  font-size:clamp(26px, 7.4vw, 33px); line-height:1.14;
-  letter-spacing:-.015em; margin:18px 0 0;
-  text-wrap:balance;
+  font-size:clamp(27px,7.6vw,34px); line-height:1.13;
+  letter-spacing:-.015em; margin:16px 0 0; text-wrap:balance;
 }
-h1 em{ font-style:italic; color:var(--sage); }
+h1 em{ font-style:italic; color:var(--sage); display:block; margin-top:2px; }
 
-/* ---------- curva-assinatura ---------- */
-.sig{ margin:26px auto 0; width:min(232px, 72%); }
-.sig svg{ width:100%; height:auto; overflow:visible; display:block; }
-.sig .ln{
-  fill:none; stroke:url(#g); stroke-width:1.7;
-  stroke-linecap:round; stroke-linejoin:round;
-  stroke-dasharray:var(--len,700); stroke-dashoffset:var(--len,700);
-  animation:draw 2s cubic-bezier(.35,.5,.15,1) .5s forwards;
-}
-@keyframes draw{ to{ stroke-dashoffset:0; } }
-
-/* ---------- as três frases, no mesmo lugar ---------- */
-.rotor{
-  position:relative; margin:26px 0 0;
-  min-height:calc(2 * 1.5em + 2px);
-  display:grid; place-items:center;
-}
+.rotor{ position:relative; margin:22px 0 0; min-height:calc(2 * 1.5em); display:grid; place-items:center; }
 .rotor p{
-  grid-area:1/1; margin:0; max-width:31ch;
+  grid-area:1/1; margin:0; max-width:30ch;
   font-family:var(--serif); font-style:italic; font-weight:500;
-  font-size:15.5px; line-height:1.5; color:#DCDCC9;
+  font-size:15px; line-height:1.5; color:#D8D8C4;
   opacity:0; transform:translateY(6px);
-  transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1);
+  /* saída rápida, sem atraso */
+  transition:opacity .32s ease, transform .32s ease;
 }
-.rotor p.on{ opacity:1; transform:none; }
+/* entrada só começa depois que a anterior terminou de sair — sem o atraso,
+   as duas ficam visíveis ao mesmo tempo e o texto vira um borrão */
+.rotor p.on{
+  opacity:1; transform:none;
+  transition:opacity .5s ease .34s, transform .62s cubic-bezier(.2,.7,.3,1) .34s;
+}
 .tieline{
-  margin:14px 0 0; font-size:11px; letter-spacing:.16em;
+  margin:13px 0 0; font-size:10.5px; letter-spacing:.16em;
   text-transform:uppercase; color:var(--dim);
 }
 .tieline b{ color:var(--sage); font-weight:500; }
 
-/* ---------- ação ---------- */
-.rule{ height:1px; background:var(--faint); margin:24px 0 22px; }
+.rule{ height:1px; background:var(--faint); margin:22px 0 20px; }
 .cta{
   position:relative; overflow:hidden;
   display:flex; align-items:center; justify-content:center; gap:9px;
   padding:16px 20px; width:100%;
   background:var(--terra); color:#FFF6F1;
   font-family:var(--sans); font-size:14.5px; font-weight:500;
-  letter-spacing:.01em; text-decoration:none; border-radius:2px;
+  text-decoration:none; border-radius:2px;
   transition:background-color .22s ease, transform .12s ease;
   -webkit-tap-highlight-color:transparent;
 }
@@ -142,72 +121,53 @@ h1 em{ font-style:italic; color:var(--sage); }
 .cta:hover .arw{ transform:translateX(3px); }
 .cta::after{
   content:""; position:absolute; inset:0;
-  background:linear-gradient(105deg, transparent 32%, rgba(255,255,255,.22) 50%, transparent 68%);
+  background:linear-gradient(105deg,transparent 32%,rgba(255,255,255,.22) 50%,transparent 68%);
   transform:translateX(-130%);
-  animation:shine 1.3s cubic-bezier(.3,.7,.4,1) 1.5s 1 both;
+  animation:shine 1.25s cubic-bezier(.3,.7,.4,1) 2.1s 1 both;
 }
 @keyframes shine{ to{ transform:translateX(130%); } }
-.note{
-  margin:12px 0 0; font-size:11.5px; color:#8D9B7E;
-  letter-spacing:.02em;
-}
+.note{ margin:11px 0 0; font-size:11.5px; color:#89997B; }
 .sign{
-  margin:20px 0 0; font-size:10px; letter-spacing:.24em;
-  text-transform:uppercase; color:#5F6E52; text-decoration:none;
-  display:inline-block;
+  margin:18px 0 0; font-size:10px; letter-spacing:.24em; text-transform:uppercase;
+  color:#5A6A50; text-decoration:none; display:inline-block;
 }
 .sign:hover{ color:var(--sage); }
 
-/* ---------- entrada ---------- */
-.up{ opacity:0; transform:translateY(11px); animation:up .85s cubic-bezier(.2,.7,.3,1) forwards; }
-.u1{ animation-delay:.05s } .u2{ animation-delay:.16s } .u3{ animation-delay:.28s }
-.u4{ animation-delay:.42s } .u5{ animation-delay:.56s } .u6{ animation-delay:.68s }
+/* entrada escalonada, atrás da convergência das partículas */
+.up{ opacity:0; transform:translateY(12px); animation:up .9s cubic-bezier(.2,.7,.3,1) forwards; }
+.u1{animation-delay:.30s} .u2{animation-delay:.46s} .u3{animation-delay:.62s}
+.u4{animation-delay:.80s} .u5{animation-delay:1.02s} .u6{animation-delay:1.22s} .u7{animation-delay:1.40s}
 @keyframes up{ to{ opacity:1; transform:none; } }
 
-:focus-visible{ outline:1.5px solid var(--terra-l); outline-offset:3px; }
+:focus-visible{ outline:1.5px solid #E8814F; outline-offset:3px; }
 
-/* telas muito baixas: deixa rolar em vez de espremer */
-@media (max-height:620px){
-  body{ place-items:start center; padding-top:14px; }
+@media (max-height:640px){
+  body{ place-items:start center; padding-top:12px; }
   h1{ font-size:clamp(23px,6.6vw,28px); }
-  .sig{ margin-top:16px; } .rotor{ margin-top:16px; }
-  .rule{ margin:18px 0 16px; }
+  .rotor{ margin-top:16px; } .rule{ margin:16px 0 14px; }
 }
 
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:.001ms !important; animation-iteration-count:1 !important;
      transition-duration:.001ms !important; }
   .up{ opacity:1; transform:none; }
-  .sig .ln{ stroke-dashoffset:0; }
   .cta::after{ display:none; }
-  /* sem rodízio: as três frases ficam visíveis, empilhadas */
   .rotor{ display:block; min-height:0; }
-  .rotor p{ opacity:1; transform:none; margin:0 auto 8px; }
+  .rotor p{ opacity:1; transform:none; margin:0 auto 7px; }
 }
 </style>
 </head>
 <body>
 
+<canvas id="scene" aria-hidden="true"></canvas>
+
 <main class="card">
   <div class="mark up u1" aria-label="Vita Nova">VN</div>
   <p class="kicker up u2">Grupo aberto</p>
 
-  <h1 class="up u3">Não é falta de força de vontade.<br><em>É dopamina.</em></h1>
+  <h1 class="up u3">A partir daqui,<em>para de ser culpa sua.</em></h1>
 
-  <figure class="sig up u4">
-    <svg viewBox="0 0 240 44" role="img" aria-label="Curva do sistema de recompensa: picos altos que vão se estabilizando numa linha de base.">
-      <defs>
-        <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#E8814F"/>
-          <stop offset="52%" stop-color="#C08A42"/>
-          <stop offset="100%" stop-color="#9DC97A"/>
-        </linearGradient>
-      </defs>
-      <path class="ln" id="curva" d="M2.0 20.0 L5.3 13.9 L8.6 10.2 L11.8 7.6 L15.1 6.1 L18.4 5.5 L21.7 5.9 L24.9 7.3 L28.2 9.6 L31.5 12.8 L34.8 17.0 L38.1 24.0 L41.3 28.9 L44.6 32.5 L47.9 35.1 L51.2 37.0 L54.4 38.0 L57.7 38.3 L61.0 37.8 L64.3 36.8 L67.6 35.1 L70.8 32.9 L74.1 30.1 L77.4 25.2 L80.7 22.2 L83.9 20.3 L87.2 19.0 L90.5 18.4 L93.8 18.2 L97.1 18.6 L100.3 19.3 L103.6 20.5 L106.9 21.9 L110.2 23.6 L113.4 25.5 L116.7 27.6 L120.0 30.1 L123.3 33.4 L126.6 35.2 L129.8 36.5 L133.1 37.3 L136.4 37.9 L139.7 38.1 L142.9 38.0 L146.2 37.7 L149.5 37.1 L152.8 36.3 L156.1 35.4 L159.3 34.4 L162.6 33.2 L165.9 32.0 L169.2 30.7 L172.4 29.3 L175.7 27.6 L179.0 26.3 L182.3 25.2 L185.6 24.2 L188.8 23.4 L192.1 22.6 L195.4 21.8 L198.7 21.1 L201.9 20.5 L205.2 19.9 L208.5 19.4 L211.8 18.9 L215.1 18.5 L218.3 18.1 L221.6 17.9 L224.9 17.7 L228.2 17.6 L231.4 17.7 L234.7 17.8 L238.0 18.0"/>
-    </svg>
-  </figure>
-
-  <div class="rotor up u5" aria-live="off">
+  <div class="rotor up u5">
     <p class="on">“Você já comeu. E abre a geladeira mesmo assim.”</p>
     <p>“O vídeo acabou — e o dedo já tinha subido.”</p>
     <p>“Cansada o dia inteiro. Desperta às 23h.”</p>
@@ -220,31 +180,193 @@ h1 em{ font-style:italic; color:var(--sage); }
     Entrar no grupo
     <svg class="arw" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
   </a>
-  <p class="note up u6">Gratuito · você sai quando quiser</p>
+  <p class="note up u7">Gratuito · você sai quando quiser</p>
 
-  <a class="sign up u6" href="https://instagram.com/oficial.vitanova">@oficial.vitanova</a>
+  <a class="sign up u7" href="https://instagram.com/oficial.vitanova">@oficial.vitanova</a>
 </main>
 
 <script>
 (function () {
-  // comprimento real do traço, para o desenho progressivo
-  var ln = document.getElementById('curva');
-  if (ln && ln.getTotalLength) {
-    document.querySelector('.sig').style.setProperty('--len', Math.ceil(ln.getTotalLength()));
+  var cv = document.getElementById('scene');
+  var ctx = cv.getContext('2d', { alpha: false });
+  if (!ctx) { cv.remove(); return; }
+
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W = 0, H = 0, cx = 0, cy = 0, dpr = 1, R = 0;
+
+  // Três correntes: os três hábitos. Convergem para a mesma origem.
+  var STREAMS = [
+    { a: -Math.PI * 0.78, c: [157, 219, 106] },  // verde
+    { a:  Math.PI * 0.10, c: [232, 200, 150] },  // creme
+    { a:  Math.PI * 0.66, c: [232, 129,  79] }   // terracota
+  ];
+
+  var parts = [], N = 0;
+
+  // sprite do ponto: pré-renderizar é muito mais rápido que arc() por partícula
+  function sprite(rgb) {
+    var s = 16, c = document.createElement('canvas');
+    c.width = c.height = s;
+    var g = c.getContext('2d');
+    var rg = g.createRadialGradient(s/2, s/2, 0, s/2, s/2, s/2);
+    rg.addColorStop(0,   'rgba(' + rgb + ',1)');
+    rg.addColorStop(.35, 'rgba(' + rgb + ',.45)');
+    rg.addColorStop(1,   'rgba(' + rgb + ',0)');
+    g.fillStyle = rg; g.fillRect(0, 0, s, s);
+    return c;
+  }
+  STREAMS.forEach(function (s) { s.sprite = sprite(s.c.join(',')); });
+
+  // halo do núcleo, também pré-renderizado
+  var halo = (function () {
+    var s = 256, c = document.createElement('canvas');
+    c.width = c.height = s;
+    var g = c.getContext('2d');
+    var rg = g.createRadialGradient(s/2, s/2, 0, s/2, s/2, s/2);
+    rg.addColorStop(0,   'rgba(205,250,170,.88)');
+    rg.addColorStop(.10, 'rgba(160,225,110,.62)');
+    rg.addColorStop(.30, 'rgba(110,180,70,.24)');
+    rg.addColorStop(.60, 'rgba(80,150,55,.07)');
+    rg.addColorStop(1,   'rgba(80,150,55,0)');
+    g.fillStyle = rg; g.fillRect(0, 0, s, s);
+    return c;
+  })();
+
+  function reset(p, first) {
+    var s = STREAMS[p.k];
+    // nasce longe, no ângulo da sua corrente, com dispersão
+    var spread = 0.55;
+    p.ang = s.a + (Math.random() - .5) * spread;
+    p.rad = (first ? 0.55 + Math.random() * 0.9 : 1.0 + Math.random() * 0.5) * R;
+    p.spin = (Math.random() - .5) * 0.7;          // curvatura da trajetória
+    p.spd = 0.34 + Math.random() * 0.5;
+    p.size = 1.6 + Math.random() * 3.4;
+    p.life = 0;
   }
 
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function build() {
+    N = W < 420 ? 140 : W < 900 ? 200 : 270;
+    parts.length = 0;
+    for (var i = 0; i < N; i++) {
+      var p = { k: i % 3 };
+      reset(p, true);
+      parts.push(p);
+    }
+  }
 
-  // rodízio das três frases: cada ângulo tem seu tempo de leitura
-  var frases = document.querySelectorAll('.rotor p');
-  if (frases.length < 2) return;
-  var i = 0;
-  setInterval(function () {
-    if (document.hidden) return;
-    frases[i].classList.remove('on');
-    i = (i + 1) % frases.length;
-    frases[i].classList.add('on');
-  }, 4200);
+  function size() {
+    /* A cena é só glow difuso — não tem detalhe fino que justifique 2x.
+       Limitar o DPR aqui corta o fill rate pela metade ou mais, que é o
+       gargalo real em celular de gama média. */
+    dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+    W = innerWidth; H = innerHeight;
+    cv.width = Math.floor(W * dpr); cv.height = Math.floor(H * dpr);
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cx = W / 2;
+    /* acima do centro de propósito: no centro exato o núcleo fica atrás da
+       frase do rodízio e come o contraste dela */
+    cy = H * 0.34;
+    R = Math.max(W, H) * 0.62;
+    build();
+  }
+
+  var t0 = 0, raf = 0;
+
+  function draw(now) {
+    raf = requestAnimationFrame(draw);
+    if (!t0) t0 = now;
+    var t = (now - t0) / 1000;
+
+    // convergência forte no primeiro segundo, depois regime de órbita
+    var rush = Math.max(0, 1 - t / 1.15);
+    var pull = 0.6 + rush * 3.4;
+    // passada a abertura, a cena recua para o texto respirar
+    var calm = 1 - 0.44 * Math.min(1, Math.max(0, (t - 2.1) / 2.2));
+
+    // rastro: o quadro anterior é apagado só parcialmente, então as
+    // partículas deixam trilhas de luz enquanto convergem
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(8,21,11,' + (0.20 + rush * 0.10).toFixed(3) + ')';
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.globalCompositeOperation = 'lighter';
+
+    // flash: sobe e desce uma vez, quando a convergência atinge o centro
+    var flash = 0;
+    if (t > 0.72 && t < 2.0) flash = Math.sin(((t - 0.72) / 1.28) * Math.PI);
+
+    // núcleo: pulsa devagar, "inspira" na convergência e estoura no flash
+    var beat = 1 + Math.sin(t * 1.5) * 0.05 + rush * 0.45 + flash * 0.34;
+    var hs = R * 0.70 * beat;
+    ctx.globalAlpha = Math.min(1, t / .45) * (0.66 + rush * 0.24 + flash * 0.30) * calm;
+    ctx.drawImage(halo, cx - hs / 2, cy - hs / 2, hs, hs);
+
+    // (um anel expandindo viraria dezenas de círculos concêntricos: o rastro
+    //  preserva cada quadro. O impacto vem do flash do núcleo, acima.)
+
+    for (var i = 0; i < N; i++) {
+      var p = parts[i];
+      p.rad -= p.spd * pull * (0.6 + p.rad / R) * 1.9;
+      p.ang += p.spin * 0.006 * (1 + (R - p.rad) / R);
+
+      if (p.rad < R * 0.035) { reset(p, false); continue; }
+
+      var x = cx + Math.cos(p.ang) * p.rad;
+      var y = cy + Math.sin(p.ang) * p.rad * 0.82;
+
+      // some ao nascer e ao chegar, para nada "pipocar" na tela
+      var edge = Math.min(1, (R - p.rad) / (R * 0.22));
+      var core = Math.min(1, (p.rad - R * 0.035) / (R * 0.18));
+      ctx.globalAlpha = Math.max(0, edge * core) * (0.62 + rush * 0.38) * calm;
+
+      var d = p.size * (1 + rush * 1.7) * 3.6;
+      ctx.drawImage(STREAMS[p.k].sprite, x - d / 2, y - d / 2, d, d);
+    }
+
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  function still() {   // um quadro só, para prefers-reduced-motion
+    ctx.fillStyle = '#08150B'; ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    var hs = R * 0.62;
+    ctx.globalAlpha = .5;
+    ctx.drawImage(halo, cx - hs / 2, cy - hs / 2, hs, hs);
+    for (var i = 0; i < N; i++) {
+      var p = parts[i];
+      var x = cx + Math.cos(p.ang) * p.rad, y = cy + Math.sin(p.ang) * p.rad * 0.82;
+      ctx.globalAlpha = .42; var d = p.size * 3.2;
+      ctx.drawImage(STREAMS[p.k].sprite, x - d / 2, y - d / 2, d, d);
+    }
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  }
+
+  size();
+  var rz; addEventListener('resize', function () {
+    clearTimeout(rz); rz = setTimeout(function () { size(); if (reduce) still(); }, 160);
+  });
+
+  if (reduce) { still(); }
+  else {
+    raf = requestAnimationFrame(draw);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else { t0 = 0; raf = requestAnimationFrame(draw); }
+    });
+  }
+
+  // rodízio das três frases
+  if (!reduce) {
+    var fr = document.querySelectorAll('.rotor p'), i = 0;
+    if (fr.length > 1) setInterval(function () {
+      if (document.hidden) return;
+      fr[i].classList.remove('on');
+      i = (i + 1) % fr.length;
+      fr[i].classList.add('on');
+    }, 4200);
+  }
 })();
 </script>
 </body>
