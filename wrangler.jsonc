@@ -19,6 +19,9 @@
   "compatibility_date": "2025-09-01",
 
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    // sem isto, /grupo responde 307 para /grupo/ — um hop a mais de
+    // latência num link que vai ser colado em story
+    "html_handling": "drop-trailing-slash"
   }
 }

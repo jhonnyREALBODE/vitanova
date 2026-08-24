@@ -193,6 +193,38 @@ rótulo fora da tela, ausência de scroll horizontal, e o CTA principal visível
 e clicável acima da dobra. Também validados os três tiers e o modo
 `prefers-reduced-motion`.
 
+## A página do grupo aberto (`/grupo`)
+
+Destino do link usado nos stories do Instagram, publicado junto com o site em
+**`/grupo`**. Objetivo único: entrar no grupo do WhatsApp.
+
+Não é um site — é um cartão: uma tela, sem rolagem, centrado. A pessoa chega do
+story, a cena converge, lê em três segundos e clica.
+
+O arquivo é `public/grupo/index.html`. Como está em `public/`, o Vite o copia
+para `dist/grupo/index.html` no build, e o Worker serve em `/grupo` — mesmo
+deploy, mesmo domínio, nenhum serviço a mais. Ele é HTML puro, sem build e sem
+dependências: `html_handling: "drop-trailing-slash"` no `wrangler.jsonc` faz
+`/grupo` responder direto, sem o redirect 307 que custaria um hop de latência
+num link de story.
+
+**A animação é a tese.** Três correntes de partículas — verde, creme e terracota
+— convergem de direções diferentes para um mesmo núcleo, que dá um flash quando
+a convergência chega: "três hábitos, uma raiz" em movimento. Feita em Canvas 2D,
+não em Three.js — os 122 KB gzip do Three não se pagam num link que abre dentro
+do Instagram em 4G. A página inteira tem ~5,8 KB gzip numa requisição.
+
+Medido: **61 fps normal e 46 fps com a CPU 4× throttled** (aproximação de celular
+de gama média). Chegar lá exigiu limitar o DPR do canvas a 1,25 — a cena é glow
+difuso, sem detalhe fino que justifique 2×, e o fill rate era o gargalo.
+
+Verificado sem rolagem em 360×640, 375×667, 390×844, 412×915, 1280×800 e
+1440×900, com CTA visível e link correto. Com `prefers-reduced-motion` a cena
+desenha um quadro estático e o loop nem inicia.
+
+Para trocar a marca: o monograma VN está em dois pontos do arquivo, ambos
+marcados por comentário (o favicon no `<head>` e o `.mark` do cartão).
+
 ## Contato
 
 O número de WhatsApp e a mensagem pré-preenchida ficam em
