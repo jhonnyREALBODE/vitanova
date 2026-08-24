@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { WHATSAPP_URL } from './src/config/contact.js';
+import { WHATSAPP_URL, GRUPO_URL } from './src/config/contact.js';
 
 /**
  * Injeta os links de contato no HTML em tempo de build.
@@ -16,6 +16,7 @@ const contactLinks = () => ({
     handler: (html) =>
       html
         .replaceAll('%WHATSAPP_URL%', WHATSAPP_URL)
+        .replaceAll('%GRUPO_URL%', GRUPO_URL)
         // Carimbo de build: permite abrir o site publicado, ver o fonte e
         // saber na hora QUAL versão está no ar — sem isso, "o deploy não
         // subiu" e "o navegador está com cache" são indistinguíveis.

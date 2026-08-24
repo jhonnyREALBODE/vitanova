@@ -21,5 +21,14 @@ export function whatsappUrl(message = WHATSAPP_DEFAULT_MESSAGE) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
-/** Link padrão, usado por todos os CTAs "Falar no WhatsApp". */
+/** Link direto de conversa 1:1. Mantido para quando for preciso. */
 export const WHATSAPP_URL = whatsappUrl();
+
+/**
+ * Página do grupo aberto — destino atual dos CTAs do site.
+ *
+ * Hoje é uma rota do próprio Worker (`public/grupo/index.html`). Se a página
+ * for para outro repositório e ganhar domínio próprio, basta trocar por essa
+ * URL absoluta aqui: os três CTAs do site acompanham.
+ */
+export const GRUPO_URL = '/grupo';
