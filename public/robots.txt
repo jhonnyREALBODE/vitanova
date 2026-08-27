@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /acesso/
+
+# O caminho é listado aqui de propósito: o que protege a página é o token
+# no final da URL, não o segredo do prefixo. Isto só evita indexação.

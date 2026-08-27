@@ -1,16 +1,20 @@
-# Páginas não publicadas
+# Páginas de acesso restrito
 
-Esta pasta fica **fora de `public/`** de propósito: nada aqui entra no `dist/`
-nem vai para o ar no deploy.
+## Turma paga — `/acesso/82fd649aed29`
 
-## `exclusivo/index.html`
+Cartão entregue a quem comprou. Mesmo desenho do `/grupo`, com o link do grupo
+exclusivo e textos de pós-compra.
 
-Cartão da turma paga — mesmo desenho do `/grupo`, com o link do grupo exclusivo
-e textos de pós-compra ("Vaga confirmada", "Entrar no grupo da turma").
+**A proteção é o token no caminho**, não autenticação: quem tiver a URL entra.
+`/acesso/` e qualquer outro caminho abaixo dele respondem 404. A página tem
+`noindex` no HTML, `X-Robots-Tag` no `_headers` e está no `robots.txt`, então
+não aparece em busca — mas se a URL for encaminhada por alguém, funciona para
+quem receber.
 
-Não está publicado porque a URL de um grupo pago não deve ser adivinhável. Quando
-for definido como entregá-lo (redirecionamento da Cacto, e-mail de confirmação ou
-webhook), ele ganha um endereço — de preferência com caminho não óbvio ou token.
+**A cada turma nova:** renomeie a pasta `public/acesso/<token>/` com um token
+novo (`python3 -c "import secrets; print(secrets.token_hex(6))"`) e troque o
+link do grupo dentro do arquivo. O link antigo deixa de existir na hora.
 
-O link do grupo está hardcoded no HTML, marcado por comentário logo antes de
-`<main class="card">`. Trocar ali a cada turma.
+Se um dia precisar de proteção real — link individual por comprador, validado
+contra a compra — o caminho é o webhook da Cacto chegando numa rota do próprio
+Worker.

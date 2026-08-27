@@ -15,3 +15,9 @@
 
 /grupo/*
   Cache-Control: public, max-age=0, must-revalidate
+
+# Página de acesso da turma paga: nunca cacheada em intermediários e sempre
+# revalidada — o link é entregue individualmente e pode ser trocado a cada turma.
+/acesso/*
+  Cache-Control: private, max-age=0, must-revalidate
+  X-Robots-Tag: noindex, nofollow
